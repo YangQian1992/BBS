@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <title>用户注册 - 博客园</title>
+    <link href="/static/css/_layout.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/css/signup.min.css" />
+
+</head>
+<body>
+    <!--nav-->
+    <nav class="navbar-fixed-top nav-box navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--<a href="//www.cnblogs.com" class="no-style">-->
+                <a href="#" class="no-style">
+                    <svg class="icon-logo">
+                        <use xlink:href="#icon-logo"></use>
+                    </svg>
+                    <svg class="icon-txt-logo">
+                        <use xlink:href="#icon-txt-logo"></use>
+                    </svg>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right nav-main-icon">
+                    <li>
+                        <!--<a href="//www.cnblogs.com" class="no-style">-->
+                        <a href="#" class="no-style">
+                            <svg class="icon-home">
+                                <use xlink:href="#icon-home"></use>
+                            </svg>
+                            首 页
+                        </a>
+                    </li>
+                        <li>
+                            <!--<a href="/signin?returnUrl=%2F">-->
+                            <a href="#">
+                                <svg>
+                                    <use xlink:href="#icon-signin"></use>
+                                </svg>
+                                登 录
+                            </a>
+                        </li>
+                    <li>
+                        <a href="/signup" id="signUpMenu">
+                            <svg>
+                                <use xlink:href="#icon-signup"></use>
+                            </svg>
+                            注 册
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/assist#" id="assistMenu">
+                            <svg>
+                                <use xlink:href="#icon-assist"></use>
+                            </svg>
+                            帮 助
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!---body-->
+    <div class="container body-box">
+        <div class="center-block body-content">
+            <!--头部提示-->
+            <div class="hidden-xs title-top col-sm-12">
+                注册新用户
+                <hr class="head-hr" />
+            </div>
+            <div class="form-wrap">
+                <form action="/register/" method="post"  class="form-horizontal col-sm-8 col-sm-offset-4 form-padding" role="form" novalidate autocomplete="off">
+                    {% csrf_token %}
+                    <div class="form-space-top hidden-xs"></div>
+                    <!--每一行-->
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">
+                            <label class="w4-4" for="{{ form_obj.username.id_for_label }}">{{ form_obj.username.label }}</label>
+                        </div>
+                        <div class="col-sm-10 has-feedback">
+                            {{ form_obj.username }}
+                            {{ form_obj.username.errors.0 }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">
+                            <label class="w4-2" for="{{ form_obj.password.id_for_label }}">{{ form_obj.password.label }}</label>
+                        </div>
+                        <div class="col-sm-10 has-feedback">
+                            {{ form_obj.password }}
+                            {{ form_obj.password.errors.0 }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">
+                            <label class="w4-4" for="{{ form_obj.re_password.id_for_label }}">{{ form_obj.re_password.label }}</label>
+                        </div>
+                        <div class="col-sm-10 has-feedback">
+                            {{ form_obj.re_password }}
+                            {{ form_obj.re_password.errors.0 }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">
+                            <label class="w4-2" for="{{ form_obj.email.id_for_label }}">{{ form_obj.email.label }}</label>
+                        </div>
+                        <div class="col-sm-10 has-feedback">
+                            {{ form_obj.email }}
+                            {{ form_obj.email.errors.0 }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">
+                            <label class="w4-4" for="{{ form_obj.phone.id_for_label }}">{{ form_obj.phone.label }}</label>
+                        </div>
+                        <div class="col-sm-10 has-feedback">
+                            <div class="mobile-control-wrap">
+                                {{ form_obj.phone }}
+                                {{ form_obj.phone.errors.0 }}
+                            </div>
+                        </div>
+                    </div>
+                    <!--注册按钮-->
+                    <div class="form-group">
+                        <div class="col-lg-6 col-lg-offset-2">
+                            <span class="col-sm-12 ajax-error"></span>
+                            <button id="submitBtn" type="submit" class="btn ladda-button center-block cnblogs-btn-blue" data-style="zoom-in"><span class="ladda-label">注册</span></button>
+                        </div>
+                    </div>
+                 </form>
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <br style="clear:both" />
+    <div id="footer_bottom" class="text-center">
+        <div><a href="//www.cnblogs.com/AboutUS.aspx" class="hidden-xs">关于博客园</a><a href="//www.cnblogs.com/ContactUs.aspx" class="hidden-xs">联系我们</a>©2004-2018<a href="//www.cnblogs.com/">博客园</a><span class="hidden-xs">保留所有权利</span> Powered by ASP.NET Core on Linux</div>
+    </div>
+</body>
+</html>

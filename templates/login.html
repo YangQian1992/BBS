@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>用户登录 - 博客园</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link href="/static/css/ladda-themeless.min.css" rel="stylesheet" />
+    <link href="/static/css/signin_bundle.css" type="text/css" rel="stylesheet" />
+</head>
+<body onload="setFocus()">
+    <div style="width: 100%;">
+        <div align="center">
+            <div id="Main">
+                <form action="/login/" method="post" novalidate autocomplete="off">
+                    {% csrf_token %}
+                    <div id="Heading">登录博客园 - 代码改变世界</div>
+                    <div class="block">
+                        <label class="label-line">登录用户名(<a href="#" tabindex="-1" class="tb_right">找回</a>)</label>
+                        <input name="user" type="text" id="input1" value="" class="input-text" onkeydown="check_enter(event)" /> <span id="tip_input1" class="tip"></span>
+                    </div>
+                    <div class="block">
+                        <label class="label-line">密码(<a href="#" tabindex="-1" class="tb_right">重置</a>)</label>
+                        <input name="pwd" type="password" id="input2" value="" class="input-text" onkeydown="check_enter(event)" /> <span id="tip_input2" class="tip"></span>
+                        <p>
+                            <span class="help-block">{{ error_msg }}</span>
+                        </p>
+                    </div>
+                    <div class="block">
+                        <input id="remember_me" type="checkbox" name="remember_me" onkeydown="check_enter(event)" /><label for="remember_me" onkeydown="check_enter(event)">下次自动登录</label>
+                    </div>
+                    <div class="block">
+                        <input type="submit" id="signin" class="button" value="登录" /> <span id="tip_btn" class="tip"></span>
+                    </div>
+                    <div class="block nav">
+                        &raquo; <a href="/register.aspx?ReturnUrl=https://www.cnblogs.com/" title="注册成为博客园用户">立即注册</a><br />
+                        &raquo; <a href="http://www.cnblogs.com/ContactUs.aspx">反馈问题</a>
+                    </div>
+                </form>
+                <div style="clear: both"/>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
