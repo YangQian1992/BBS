@@ -3,7 +3,6 @@ from blog01.forms import Register_Form
 from django.contrib import auth
 from django.contrib.auth.decorators  import login_required
 # from django.contrib.auth.models import User
-
 from blog01 import models
 
 
@@ -330,6 +329,9 @@ def set_password(request):
 
 
 ################ 登录验证码 版本4 #######################
+# 返回响应的时候告诉浏览器不要缓存
+from django.views.decorators.cache import never_cache
+@never_cache
 def v_code(request):
     # 随机生成图片
     from PIL import Image
@@ -447,3 +449,54 @@ class Login(views.View):
                 res["code"] = 1
                 res["msg"] = '用户名或密码不正确！'
         return JsonResponse(res)
+
+
+###########################  滑动验证码  ##############################
+from utils.geetest import GeetestLib
+
+#请在官网申请ID使用，示例ID不可使用
+pc_geetest_id = "b46d1900d0a894591916ea94ea91bd2c"
+pc_geetest_key = "36fc3fe98530eea08dfc6ce76e3d24c4"
+
+def pcgetcaptcha(request):
+    user_id = 'test'
+    gt = GeetestLib(pc_geetest_id, pc_geetest_key)
+    status = gt.pre_process(user_id)
+    request.session[gt.GT_STATUS_SESSION_KEY] = status
+    request.session["user_id"] = user_id
+    response_str = gt.get_response_str()
+    return HttpResponse(response_str)
+
+# 滑动验证码版本的登录函数
+def login_huadong(request):
+    res = {"code":0}
+    if request.method == "POST":
+        gt = GeetestLib(pc_geetest_id, pc_geetest_key)
+        challenge = request.POST.get(gt.FN_CHALLENGE, '')
+        validate = request.POST.get(gt.FN_VALIDATE, '')
+        seccode = request.POST.get(gt.FN_SECCODE, '')
+        status = request.session[gt.GT_STATUS_SESSION_KEY]
+        user_id = request.session["user_id"]
+        if status:
+            result = gt.success_validate(challenge, validate, seccode, user_id)
+        else:
+            result = gt.failback_validate(challenge, validate, seccode)
+        if result:
+            # 滑动验证码校验通过
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = auth.authenticate(username= username ,password = password)
+            if user:
+                # 用户名和密码正确
+                auth.login(request,user)
+            else:
+                # 用户名或者密码不正确
+                res["code"] = 1
+                res["msg"] = "用户名或者密码不正确！"
+        else:
+            # 滑动验证码校验失败
+            res["code"] = 2
+            res["msg"] = "验证码错误！"
+        return JsonResponse(res)
+    form_obj = Login_Form()
+    return render(request,'login_ajax_huadong.html',{"form_obj":form_obj})

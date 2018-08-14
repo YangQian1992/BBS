@@ -482,6 +482,8 @@
         $(this).val('').next('spam').text('').parent().removeClass('has-error');
     });
 
+    // 用户输入用户名被占用，重新在输入框输入内容时，原来输入的内容消失且错误提示消失
+    $('#id_username').val('').next().text('');
 
     // 用户头像预览：当用户选中文件之后，也就是头像的input标签有值时触发以下事件
     $('#avatar').change(function () {
