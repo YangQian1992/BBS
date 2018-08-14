@@ -20,8 +20,10 @@ from blog01 import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    ############ 注册 ############
+    ############ 注册01 ############
     url(r'^register/', views.register),
+    ############ 注册02 ############
+    url(r'^register_new/', views.Register_new.as_view()),
     ############ 登录 ############
     url(r'^login/', views.Login.as_view()),
     ############ 主页 ############

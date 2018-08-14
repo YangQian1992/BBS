@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <title>用户注册</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link href="/static/css/_layout.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/css/signup.min.css" />
+    <link rel="stylesheet" href="/static/css/bbs.css">
+</head>
+<body>
+    <!--nav-->
+    <nav class="navbar-fixed-top nav-box navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--<a href="//www.cnblogs.com" class="no-style">-->
+                <a href="" class="no-style">
+                    <svg class="icon-logo">
+                        <use xlink:href="#icon-logo"></use>
+                    </svg>
+                    <svg class="icon-txt-logo">
+                        <use xlink:href="#icon-txt-logo"></use>
+                    </svg>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right nav-main-icon">
+                    <li>
+                        <!--<a href="//www.cnblogs.com" class="no-style">-->
+                        <a href="#" class="no-style">
+                            <svg class="icon-home">
+                                <use xlink:href="#icon-home"></use>
+                            </svg>
+                            首 页
+                        </a>
+                    </li>
+                        <li>
+                            <!--<a href="/signin?returnUrl=%2F">-->
+                            <a href="#">
+                                <svg>
+                                    <use xlink:href="#icon-signin"></use>
+                                </svg>
+                                登 录
+                            </a>
+                        </li>
+                    <li>
+                        <a href="/register_new/" id="signUpMenu">
+                            <svg>
+                                <use xlink:href="#icon-signup"></use>
+                            </svg>
+                            注 册
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/assist#" id="assistMenu">
+                            <svg>
+                                <use xlink:href="#icon-assist"></use>
+                            </svg>
+                            帮 助
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!---body-->
+    <div class="container body-box">
+        <div class="center-block body-content">
+            <!--头部提示-->
+            <div class="hidden-xs title-top col-sm-12">
+                注册新用户
+                <hr class="head-hr" />
+            </div>
+            <div class="form-wrap">
+                <form class="form-horizontal col-sm-8 col-sm-offset-2 form-padding" role="form" novalidate>
+                    {% csrf_token %}
+                    <div class="form-space-top hidden-xs"></div>
+                    <!--每一行-->
+                    <div class="form-group" id="username_form">
+                        <div class="col-sm-2 control-label">
+                            <label class="w4-4" for="{{ form_obj.username.id_for_label }}">{{ form_obj.username.label }}</label>
+                        </div>
+                        <div class="col-sm-10 has-feedback">
+                            {{ form_obj.username }}
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">
+                            <label class="w4-2" for="{{ form_obj.password.id_for_label }}">{{ form_obj.password.label }}</label>
+                        </div>
+                        <div class="col-sm-10 has-feedback">
+                            {{ form_obj.password }}
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">
+                            <label class="w4-4" for="{{ form_obj.re_password.id_for_label }}">{{ form_obj.re_password.label }}</label>
+                        </div>
+                        <div class="col-sm-10 has-feedback">
+                            {{ form_obj.re_password }}
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">
+                            <label class="w4-2" for="{{ form_obj.email.id_for_label }}">{{ form_obj.email.label }}</label>
+                        </div>
+                        <div class="col-sm-10 has-feedback">
+                            {{ form_obj.email }}
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">
+                            <label class="w4-4" for="{{ form_obj.phone.id_for_label }}">{{ form_obj.phone.label }}</label>
+                        </div>
+                        <div class="col-sm-10 has-feedback">
+                            {{ form_obj.phone }}
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form_group">
+                        <div class="col-sm-1 control-label">
+                            <label class="w4-4" for="v-code" style="display: block">验证码</label>
+                        </div>
+                        <div class="col-sm-9 col-sm-offset-1 has-feedback">
+                            <div class="mobile-control-wrap">
+                                <input type="text" id="v-code" class="form-control" style="width: 150px;display: inline-block">
+                                <img src="/v_code/" id="li" style="float: right ;margin-left: 10px" alt="">
+{#                                <span id="error-p" class="err-text"></span>#}
+                            </div>
+                            <div>
+                                <span id="error-p" class="err-text"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--注册按钮-->
+                    <div class="form-group">
+                        <div class="col-lg-6 col-lg-offset-2" style="margin-top: 20px">
+                            <span class="col-sm-12 ajax-error"></span>
+                            <button id="buttonBtn" type="button" class="btn ladda-button center-block cnblogs-btn-blue" data-style="zoom-in"><span class="ladda-label">注册</span></button>
+                        </div>
+                    </div>
+                 </form>
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <br style="clear:both" />
+    <div id="footer_bottom" class="text-center">
+        <div><a href="//www.cnblogs.com/AboutUS.aspx" class="hidden-xs">关于博客园</a><a href="//www.cnblogs.com/ContactUs.aspx" class="hidden-xs">联系我们</a>©2004-2018<a href="//www.cnblogs.com/">博客园</a><span class="hidden-xs">保留所有权利</span> Powered by ASP.NET Core on Linux</div>
+    </div>
+</body>
+
+<script src="/static/js/jquery-3.1.1.js"></script>
+<script src="/static/js/setupAjax.js"></script>
+<script>
+    $('#buttonBtn').click(function () {
+        // 从前端页面上获取所有数据的值
+        let username = $('#id_username').val();
+        let password = $('#id_password').val();
+        let re_password = $('#id_re_password').val();
+        let email = $('#id_email').val();
+        let phone = $('#id_phone').val();
+        let v_code = $('#v-code').val();
+
+        // 将获取到的数据通过ajax技术发送到后端
+        $.ajax({
+            url:'/register_new/',
+            type:'post',
+            data:{
+                username:username,
+                password:password,
+                re_password:re_password,
+                email:email,
+                phone:phone,
+                v_code:v_code,
+            },
+            success:function (res) {
+                console.log(res);
+                if (res.code === 2){
+                    // 验证码错误
+                    $('#error-p').text( res.msg );
+                } else if (res.code === 0){
+                    // form组件校验成功 且注册成功，从前端跳转到登录页面
+                    location.href = res.msg;
+                }else if(res.code === 3){
+                    // form组件校验成功 但是，用户名已被占用
+                    $('#id_username').next('span').text( res.msg );
+                    $('#username_form').addClass('has-error');
+                }else if(res.code === 1){
+                    // form组件校验失败，从后端获取到所有字段的错误信息，遍历获取出每个字段的错误信息提示，并在页面上展示出来
+                    $.each(res.msg,function (k,v) {
+                        $('#id_' + k ).next().text( v[0] ).parent().addClass('has-error');
+                    })
+                }
+            },
+            error:function (error) {
+                console.log(error);
+            }
+        })
+    });
+    // 验证码输入错误，用户重新在验证码输入框输入内容时，原来输入的内容消失且错误提示消失
+    $('#v-code').focus(function () {
+        $(this).val('');
+        $('#error-p').text('');
+    });
+
+    // 用户输入每个字段时出现错误，用户重新在输入框输入内容时，原来输入的内容消失且错误提示消失
+    $('input.form-control').focus(function () {
+        $(this).val('').next('spam').text('').parent().removeClass('has-error');
+    });
+
+</script>
+</html>

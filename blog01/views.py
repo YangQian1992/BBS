@@ -6,6 +6,7 @@ from django.contrib.auth.decorators  import login_required
 
 from blog01 import models
 
+
 def register(request):
     '''
     用 form 组件 和 auth 认证 来写注册函数
@@ -25,6 +26,61 @@ def register(request):
             models.UserInfo.objects.create_user(**form_data)
             return HttpResponse('注册成功！')
     return render(request,'register.html',{'form_obj':form_obj})
+
+
+################ CBV 版的注册01版本 #######################
+from django import views
+from blog01.forms import Register_Form
+from django.contrib import auth
+
+
+class Register_new(views.View):
+
+    def get(self,request):
+        form_obj = Register_Form()  # form组件写html
+        return render(request,'register_new.html',{'form_obj':form_obj})
+
+    def post(self,request):
+        print(222)
+        print(request.POST)
+        res = {"code":0}
+        # 先进行 验证码的校验
+        v_code = request.POST.get('v_code','')
+        # 验证码正确后，使用form组件进行校验
+        if v_code.upper() == request.session.get('v_code'):
+            print('验证码填写正确！')
+            form_obj = Register_Form(request.POST)  # form组件做校验
+            print('form_obj---->',form_obj)
+            # 用户输入的数据有效
+            if form_obj.is_valid():
+                # 1、注册用户
+                form_data = form_obj.cleaned_data
+                print('form_data----->',form_data)
+                # 注意移除不需要的re_password
+                form_data.pop('re_password')
+                print(form_data)
+                # 利用auth 认证去校验注册的用户是否在数据库中已存在
+                user = auth.authenticate(username=form_data['username'],password=form_data['password'])
+                if user:
+                    #  数据库中有此用户则不需要注册
+                    res["code"] = 3
+                    res["msg"] = "用户名已占用！"
+                else:
+                    #  数据库中没有此用户则需要注册
+                    models.UserInfo.objects.create_user(**form_data)
+                    #  注册成功之后跳转到登录页面
+                    res["msg"] = "/login/"
+            # 用户填写的数据不符合要求
+            else:
+                res["code"] = 1
+                # 所有字段的错误信息是通过以下form组件的命令获取
+                res["msg"] = form_obj.errors
+        # 验证码验证失败
+        else:
+            res["code"] = 2
+            res["msg"] = "验证码错误！"
+        return JsonResponse(res)
+
 
 # def login(request):
 #     '''
@@ -281,7 +337,7 @@ def v_code(request):
     # 生成图片对象
     image_obj = Image.new(
         'RGB',  # 生成图片的模式
-        (250, 35),  # 生成图片的大小
+        (240, 30),  # 生成图片的大小
         random_color()  # 随机生成图片的颜色
     )
 

@@ -86,5 +86,5 @@ class Register_Form(forms.Form):
             return self.cleaned_data
         else:
             # 确定密码和密码不同
-            self.add_error('re_pwd','两次密码不一致')
+            self.add_error('re_password','两次密码不一致')
             raise ValidationError('两次密码不一致')
