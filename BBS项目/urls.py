@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from blog01 import views
+from django.views.static import serve
+from django.conf import settings
 
 
 urlpatterns = [
@@ -34,4 +36,7 @@ urlpatterns = [
     url(r'^logout/', views.logout),
     ############ 登录验证码 ############
     url(r'^v_code/', views.v_code),
+    ###### 给用户上传的文件配置一个处理的路由 #######
+    url(r'^media/(?P<path>.*)',serve,{"document_root":settings.MEDIA_ROOT}),
+
 ]

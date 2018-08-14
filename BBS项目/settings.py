@@ -133,3 +133,7 @@ AUTH_USER_MODEL = 'blog01.UserInfo'
 
 # auth认证设置跳转的登录页面的url
 LOGIN_URL = '/login/'
+
+# 用户上传过来存放在后端数据库中的文件配置
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
