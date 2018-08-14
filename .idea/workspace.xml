@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d79d8f6-e230-49f3-aeeb-f96fa22757b0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BBS项目/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BBS项目/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BBS项目/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/BBS项目/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/avatar/default.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/avatar/yangqian.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/imgs/registersideimg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog01/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog01/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login_ajax.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login_ajax.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/register_new.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register_new.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,11 +51,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="login_ajax.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/login_ajax.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1581">
+              <caret line="67" selection-start-line="67" selection-end-line="78" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog01/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1508">
-              <caret line="340" column="12" selection-start-line="340" selection-start-column="12" selection-end-line="340" selection-end-column="12" />
+            <state relative-caret-position="-3837">
+              <caret line="106" column="19" lean-forward="true" selection-start-line="106" selection-start-column="19" selection-end-line="106" selection-end-column="19" />
               <folding>
                 <element signature="e#289#914#0" />
                 <element signature="e#1622#1883#0" />
@@ -70,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="register_new.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="register_new.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/register_new.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="270" column="14" lean-forward="true" selection-start-line="270" selection-start-column="14" selection-end-line="270" selection-end-column="14" />
+            <state relative-caret-position="-73">
+              <caret line="504" column="11" lean-forward="true" selection-start-line="504" selection-start-column="11" selection-end-line="504" selection-end-column="11" />
               <folding>
                 <element signature="e#12454#12969#0#HTML" />
                 <element signature="e#12996#15584#0#HTML" />
@@ -89,39 +95,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="blog01_userinfo" pinned="false" current-in-tab="false">
-        <entry file="das://05a8bb5a-f083-4a9d-ac8b-e43a2aefddb1/schema/bbs项目/table/blog01_userinfo">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blog01/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-744">
-              <caret line="9" column="55" lean-forward="true" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-                <element signature="e#800#1202#0" />
-                <element signature="e#1239#1713#0" />
-                <element signature="e#1745#2185#0" />
-                <element signature="e#2221#3206#0" />
-                <element signature="e#3248#3448#0" />
-                <element signature="e#3487#3814#0" />
-                <element signature="e#3850#4598#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BBS项目/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1147">
-              <caret line="37" column="18" lean-forward="true" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
+            <state relative-caret-position="286">
+              <caret line="41" column="1" lean-forward="true" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
               <folding>
                 <element signature="e#639#671#0" expanded="true" />
               </folding>
@@ -137,6 +115,7 @@
         <option value="JavaScript File" />
         <option value="CSS File" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -151,19 +130,20 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/blog01/models.py" />
         <option value="$PROJECT_DIR$/blog01/__init__.py" />
         <option value="$PROJECT_DIR$/templates/login.html" />
         <option value="$PROJECT_DIR$/static/js/jquery-3.1.1.js" />
         <option value="$PROJECT_DIR$/static/css/bootstrap.css" />
-        <option value="$PROJECT_DIR$/templates/login_ajax.html" />
         <option value="$PROJECT_DIR$/blog01/forms02.py" />
         <option value="$PROJECT_DIR$/blog01/forms.py" />
         <option value="$PROJECT_DIR$/static/css/bbs.css" />
-        <option value="$PROJECT_DIR$/templates/register_new.html" />
         <option value="$PROJECT_DIR$/blog01/views.py" />
         <option value="$PROJECT_DIR$/BBS项目/settings.py" />
         <option value="$PROJECT_DIR$/BBS项目/urls.py" />
+        <option value="$PROJECT_DIR$/杨倩_20180814.py" />
+        <option value="$PROJECT_DIR$/blog01/models.py" />
+        <option value="$PROJECT_DIR$/templates/login_ajax.html" />
+        <option value="$PROJECT_DIR$/templates/register_new.html" />
       </list>
     </option>
   </component>
@@ -176,7 +156,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="623" />
     <option name="y" value="1" />
     <option name="width" value="773" />
@@ -194,32 +174,6 @@
             <path>
               <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
               <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="blog01" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
@@ -304,7 +258,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="623" y="1" width="773" height="744" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50076336" side_tool="true" weight="0.4107143" />
@@ -313,7 +268,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49760765" visible="true" weight="0.2129771" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49760765" weight="0.2129771" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.32977098" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -348,9 +303,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2046">
           <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
-          <folding>
-            <element signature="n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -447,16 +399,6 @@
     <entry file="file://$PROJECT_DIR$/static/css/signup.min.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/login_ajax.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="22" column="20" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="26" selection-end-column="26" />
-          <folding>
-            <element signature="n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://E:/python项目/venv/Lib/site-packages/django/contrib/auth/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="415">
@@ -478,16 +420,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog01/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/avatar/yangqian.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -497,20 +429,6 @@
     <entry file="file://$PROJECT_DIR$/static/imgs/registersideimg.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog01/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1508">
-          <caret line="340" column="12" selection-start-line="340" selection-start-column="12" selection-end-line="340" selection-end-column="12" />
-          <folding>
-            <element signature="e#289#914#0" />
-            <element signature="e#1622#1883#0" />
-            <element signature="e#1911#2074#0" />
-            <element signature="e#2123#2999#0" />
-            <element signature="e#3003#3054#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BBS项目/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
@@ -518,34 +436,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/register_new.html">
+    <entry file="file://$PROJECT_DIR$/杨倩_20180814.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="270" column="14" lean-forward="true" selection-start-line="270" selection-start-column="14" selection-end-line="270" selection-end-column="14" />
+        <state relative-caret-position="-12393">
+          <caret line="89" column="7" lean-forward="true" selection-start-line="89" selection-start-column="7" selection-end-line="89" selection-end-column="7" />
           <folding>
-            <element signature="e#12454#12969#0#HTML" />
-            <element signature="e#12996#15584#0#HTML" />
-            <element signature="e#18791#18813#0#HTML" expanded="true" />
-            <element signature="e#19080#19122#0#HTML" expanded="true" />
-            <element signature="e#19184#19223#0#HTML" expanded="true" />
-            <element signature="e#19817#19884#0#HTML" expanded="true" />
-            <element signature="e#19970#19992#0#HTML" expanded="true" />
-            <element signature="e#20191#20215#0#HTML" expanded="true" />
+            <element signature="e#290#915#0" />
+            <element signature="e#3633#3894#0" />
+            <element signature="e#3922#4085#0" />
+            <element signature="e#4134#5010#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="das://05a8bb5a-f083-4a9d-ac8b-e43a2aefddb1/schema/bbs项目/table/blog01_userinfo">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+    <entry file="file://$PROJECT_DIR$/blog01/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2077">
+          <caret line="88" column="38" selection-start-line="88" selection-start-column="38" selection-end-line="88" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/blog01/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-744">
-          <caret line="9" column="55" lean-forward="true" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
+        <state relative-caret-position="372">
+          <caret line="12" column="96" selection-start-line="12" selection-start-column="96" selection-end-line="12" selection-end-column="96" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
             <element signature="e#800#1202#0" />
@@ -559,12 +476,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="das://05a8bb5a-f083-4a9d-ac8b-e43a2aefddb1/schema/bbs项目/table/blog01_userinfo">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BBS项目/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1147">
-          <caret line="37" column="18" lean-forward="true" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
+        <state relative-caret-position="286">
+          <caret line="41" column="1" lean-forward="true" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
           <folding>
             <element signature="e#639#671#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog01/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3837">
+          <caret line="106" column="19" lean-forward="true" selection-start-line="106" selection-start-column="19" selection-end-line="106" selection-end-column="19" />
+          <folding>
+            <element signature="e#289#914#0" />
+            <element signature="e#1622#1883#0" />
+            <element signature="e#1911#2074#0" />
+            <element signature="e#2123#2999#0" />
+            <element signature="e#3003#3054#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/login_ajax.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1581">
+          <caret line="67" selection-start-line="67" selection-end-line="78" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/register_new.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-73">
+          <caret line="504" column="11" lean-forward="true" selection-start-line="504" selection-start-column="11" selection-end-line="504" selection-end-column="11" />
+          <folding>
+            <element signature="e#12454#12969#0#HTML" />
+            <element signature="e#12996#15584#0#HTML" />
+            <element signature="e#18791#18813#0#HTML" expanded="true" />
+            <element signature="e#19080#19122#0#HTML" expanded="true" />
+            <element signature="e#19184#19223#0#HTML" expanded="true" />
+            <element signature="e#19817#19884#0#HTML" expanded="true" />
+            <element signature="e#19970#19992#0#HTML" expanded="true" />
+            <element signature="e#20191#20215#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

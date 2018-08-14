@@ -499,6 +499,18 @@
             // 为什么使用jquery中attr方法？-----> attr() 方法设置或返回被选元素的属性值。
             $('#avatar_img').attr('src',filereader_obj.result);
         }
+    });
+
+    $('#li').click(function () {
+        // 使用正则判断一下：如果原来的url有？就去掉，没有就加上
+        let url = this.src ; // 用JS 操作获取到属性src
+        if (/\?$/.test(url)){
+            // 去掉最后的？
+            this.src = url.slice(0,-1);
+        }else{
+            this.src = url + '?';
+        }
+        console.log(this.src);
     })
 </script>
 </html>

@@ -10,6 +10,7 @@ class UserInfo(AbstractUser):
     # phone = models.CharField(max_length=11,unique=True,null=True,verbose_name='手机号')
     phone = models.CharField(max_length=11,unique=True,null=True)   # 手机号
     avatar = models.FileField(upload_to='static/avatar',default='static/avatar/default.png')    # 头像
+    # avatar = models.FileField(upload_to='avatar/',default='static/imgs/default.png')    # 头像字段的正确写法
 
     # blog_site = models.OneToOneField(to='BlogSite',null=True,to_field='id',on_delete=models.CASCADE)
     blog = models.OneToOneField(to='Blog',null=True)
