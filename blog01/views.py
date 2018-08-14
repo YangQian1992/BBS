@@ -28,7 +28,7 @@ def register(request):
     return render(request,'register.html',{'form_obj':form_obj})
 
 
-################ CBV 版的注册01版本 #######################
+################ CBV 版的注册02 版本 #######################
 from django import views
 from blog01.forms import Register_Form
 from django.contrib import auth
@@ -54,20 +54,24 @@ class Register_new(views.View):
             # 用户输入的数据有效
             if form_obj.is_valid():
                 # 1、注册用户
-                form_data = form_obj.cleaned_data
-                print('form_data----->',form_data)
+                form_cleaned_data = form_obj.cleaned_data
+                print('form_cleaned_data----->',form_cleaned_data)
                 # 注意移除不需要的re_password
-                form_data.pop('re_password')
-                print(form_data)
+                form_cleaned_data.pop('re_password')
+                print(form_cleaned_data)
+
+                # 获取到用户上传的头像文件
+                avatar_file = request.FILES.get('avatar')
+
                 # 利用auth 认证去校验注册的用户是否在数据库中已存在
-                user = auth.authenticate(username=form_data['username'],password=form_data['password'])
+                user = auth.authenticate(username=form_cleaned_data['username'],password=form_cleaned_data['password'])
                 if user:
                     #  数据库中有此用户则不需要注册
                     res["code"] = 3
                     res["msg"] = "用户名已占用！"
                 else:
                     #  数据库中没有此用户则需要注册
-                    models.UserInfo.objects.create_user(**form_data)
+                    models.UserInfo.objects.create_user(**form_cleaned_data , avatar = avatar_file)
                     #  注册成功之后跳转到登录页面
                     res["msg"] = "/login/"
             # 用户填写的数据不符合要求
