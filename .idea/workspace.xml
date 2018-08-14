@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d79d8f6-e230-49f3-aeeb-f96fa22757b0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/static/css/_layout.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/signup.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/register_new.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/imgs/default.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BBS项目/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/BBS项目/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog01/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog01/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog01/forms02.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog01/forms02.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog01/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog01/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/register_new.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register_new.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,6 +45,9 @@
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="BBS项目" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
@@ -96,12 +94,14 @@
       <file leaf-file-name="register_new.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/register_new.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3027">
-              <caret line="223" selection-start-line="223" selection-end-line="223" />
+            <state relative-caret-position="2748">
+              <caret line="249" selection-start-line="249" selection-end-line="249" />
               <folding>
                 <element signature="n#style#0;n#label#0;n#div#0;n#div#6;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#div#0;n#div#1;n#div#6;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#div#1;n#div#6;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#label#0;n#div#0;n#div#7;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#div#7;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#7;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
@@ -165,8 +165,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="539" />
-    <option name="y" value="13" />
+    <option name="x" value="623" />
+    <option name="y" value="1" />
     <option name="width" value="773" />
     <option name="height" value="744" />
   </component>
@@ -202,19 +202,7 @@
               <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
               <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="avatar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="imgs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
@@ -241,11 +229,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\BBS项目\static\imgs" />
       <recent name="E:\BBS项目\static\css" />
       <recent name="E:\BBS项目\templates" />
       <recent name="E:\BBS项目\static" />
       <recent name="E:\BBS项目\blog01" />
-      <recent name="E:\BBS项目\static\js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -299,22 +287,22 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="539" y="13" width="773" height="744" extended-state="0" />
+    <frame x="623" y="1" width="773" height="744" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50076336" side_tool="true" weight="0.4107143" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49923664" weight="0.3607143" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49923664" weight="0.44642857" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2810271" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49760765" visible="true" weight="0.14978603" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.32977098" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="Favorites" order="2" sideWeight="0.50239235" side_tool="true" weight="0.15038168" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="manage.py@BBS项目" order="7" weight="0.5339286" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -540,12 +528,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/register_new.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3027">
-          <caret line="223" selection-start-line="223" selection-end-line="223" />
+        <state relative-caret-position="2748">
+          <caret line="249" selection-start-line="249" selection-end-line="249" />
           <folding>
             <element signature="n#style#0;n#label#0;n#div#0;n#div#6;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#div#0;n#div#1;n#div#6;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#div#1;n#div#6;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#label#0;n#div#0;n#div#7;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#7;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#7;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
