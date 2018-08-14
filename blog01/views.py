@@ -100,33 +100,33 @@ def set_password(request):
 
 
 
-################ CBV 版的登录 #######################
-from django import views
-from django.http import JsonResponse
-from blog01.forms02 import Login_Form
-
-
-class Login(views.View):
-
-    def get(self,request):
-        form_obj = Login_Form()
-        return render(request,'login_ajax.html',{'form_obj':form_obj})
-
-    def post(self,request):
-        res = {"code":0}
-        print(request.POST)
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        # 去数据库校验用户名和密码是否正确
-        user = auth.authenticate(request, username=username, password=password)
-        if user:
-            # 表示用户名密码正确
-            # 让当前用户登录,给cookie和session写入数据
-            auth.login(request, user)
-        else:
-            res["code"] = 1
-            res["msg"] = '用户名密码不正确'
-        return JsonResponse(res)
+# ################ CBV 版的登录 #######################
+# from django import views
+# from django.http import JsonResponse
+# from blog01.forms02 import Login_Form
+#
+#
+# class Login(views.View):
+#
+#     def get(self,request):
+#         form_obj = Login_Form()
+#         return render(request,'login_ajax.html',{'form_obj':form_obj})
+#
+#     def post(self,request):
+#         res = {"code":0}
+#         print(request.POST)
+#         username = request.POST.get("username")
+#         password = request.POST.get("password")
+#         # 去数据库校验用户名和密码是否正确
+#         user = auth.authenticate(request, username=username, password=password)
+#         if user:
+#             # 表示用户名密码正确
+#             # 让当前用户登录,给cookie和session写入数据
+#             auth.login(request, user)
+#         else:
+#             res["code"] = 1
+#             res["msg"] = '用户名或密码不正确！'
+#         return JsonResponse(res)
 
 ################ 登录验证码 版本1 #######################
 # def v_code(request):
@@ -350,3 +350,40 @@ def v_code(request):
     # 从内存中读取图片数据
     data = f.getvalue()
     return HttpResponse(data, content_type='image/png')
+
+
+################ CBV 版的登录02版本 #######################
+from django import views
+from django.http import JsonResponse
+from blog01.forms02 import Login_Form
+
+
+class Login(views.View):
+
+    def get(self,request):
+        form_obj = Login_Form()
+        return render(request,'login_ajax.html',{'form_obj':form_obj})
+
+    def post(self,request):
+        res = {"code":0}
+        print(request.POST)
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        v_code = request.POST.get('v_code')
+        print(v_code)
+        # 先判断验证码是否正确
+        if v_code.upper() != request.session.get('v-code',''):
+            res["code"] = 1
+            res["msg"] = "验证码错误！"
+        else:
+            # 去数据库校验用户名和密码是否正确
+            user = auth.authenticate(request, username=username, password=password)
+            if user:
+                # 表示用户名密码正确
+                # 让当前用户登录,给cookie 和 session 写入数据
+                auth.login(request, user)
+            else:
+                # 表示用户名或密码不正确
+                res["code"] = 1
+                res["msg"] = '用户名或密码不正确！'
+        return JsonResponse(res)
