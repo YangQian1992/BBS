@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^register_new/$', views.Register_new.as_view()),
     ############ 登录 ############
     url(r'^login/$', views.Login.as_view()),
-    ############ 主页 ############
+    ############ 简单的主页 ############
     url(r'^index/$', views.index),
     ############ 修改密码 ############
     url(r'^set_password/$', views.set_password),
@@ -41,4 +41,7 @@ urlpatterns = [
     ############ 滑动验证码版本的登录 ############
     url(r'^pcgetcaptcha/$',views.pcgetcaptcha),
     url(r'^login_huadong/$',views.login_huadong),
+    ############  BBS博客的主页  ############
+    url(r'^index_new/$', views.Index.as_view()),
+
 ]

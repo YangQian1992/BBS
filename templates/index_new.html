@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <title>index</title>
     {% load static %}
-    <link rel="stylesheet" href="{% get_static_prefix %}css/bootstrap.css">
+{#    <link rel="stylesheet" href="{% get_static_prefix %}css/bootstrap.css">#}
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+{#    <link rel="stylesheet" href="{% get_static_prefix %}css/bbs.css">#}
+    <link rel="stylesheet" href="/static/css/bbs.css">
 </head>
 <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -18,7 +21,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Brand</a>
+                <a class="navbar-brand" href="#">博客首页</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -40,14 +43,11 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
+                    <li><a href="#">{{ request.user.username }}</a></li>
+                    <li>
+                        <img src="/media/{{ request.user.avatar }}" alt="" style="height: 50px;width: 50px;border-radius: 50%">
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -56,7 +56,7 @@
                             <li><a href="#">Another action</a></li>
                             <li><a href="#">Something else here</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                            <li><a href="/logout/">注销</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -93,16 +93,20 @@
                                     </div>
                                     <div class="article-footer">
                                         <span>{{ article.user.username }}</span>
-                                        <span>发布于&nbsp;{{ article.create_time }}</span>
-                                        <span class="glyphicon glyphicon-comment">评论（）</span>
-                                        <span class="glyphicon glyphicon-thumbs-up">点赞（）</span>
+                                        <span>发布于&nbsp;{{ article.create_time|date:'Y-m-d H:i:s' }}</span>
+                                        <span class="glyphicon glyphicon-comment">评论（{{ article.comment_count}}）</span>
+                                        <span class="glyphicon glyphicon-thumbs-up">点赞（{{ article.up_count }}）</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <hr>
                         <!--  文章 结束 -->
                     {% endfor %}
                 </div>
+                <!-- 分页 开始 -->
+                {{ page_htnl|safe }}
+                <!-- 分页 结束 -->
             </div>
             <div class="col-md-2">
                 <div class="panel panel-info">
@@ -117,6 +121,6 @@
         </div>
     </div>
 </body>
-{% load static %}
-<script src="{% get_static_prefix %}js/bootstrap.min.js"></script>
+<script src="/static/js/jquery-3.1.1.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
 </html>

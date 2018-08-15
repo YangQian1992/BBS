@@ -118,6 +118,30 @@ def index(request):
     return render(request,'index.html')
 
 
+###################  bbs博客首页   ################
+from utils.mypage import MyPage
+
+
+class Index(views.View):
+
+    def get(self,request):
+        article_list = models.Article.objects.all()
+        print('article_list---->',article_list)
+        # 分页
+        data_amount = article_list.count()  # 文章总数量
+        page_num = request.GET.get('page',1)    # 通过url 的get请求获取到当前页面
+        page_obj = MyPage(page_num,data_amount,per_page_data=2,url_prefix='index_new')
+        # 按照分页的设置对总数据进行切片
+        data = article_list[page_obj.start:page_obj.end]
+        page_html = page_obj.ret_html()
+        return render(request,'index_new.html',{"article_list":data,"page_htnl":page_html})
+
+    def post(self,request):
+        res = {"code":0}
+        return JsonResponse(res)
+
+
+
 def logout(request):
     '''
     用auth 认证 来写注销用户的函数
@@ -434,10 +458,12 @@ class Login(views.View):
         v_code = request.POST.get('v_code')
         print(v_code)
         # 先判断验证码是否正确
-        if v_code.upper() != request.session.get('v-code',''):
+        if v_code.upper() != request.session.get('v_code',''):
+            print(111)
             res["code"] = 1
             res["msg"] = "验证码错误！"
         else:
+            print(222)
             # 去数据库校验用户名和密码是否正确
             user = auth.authenticate(request, username=username, password=password)
             if user:

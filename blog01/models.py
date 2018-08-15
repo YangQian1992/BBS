@@ -9,8 +9,8 @@ class UserInfo(AbstractUser):
     # nickname = models.CharField(max_length=32,verbose_name='昵称')
     # phone = models.CharField(max_length=11,unique=True,null=True,verbose_name='手机号')
     phone = models.CharField(max_length=11,unique=True,null=True)   # 手机号
-    avatar = models.FileField(upload_to='static/avatar',default='static/avatar/default.png')    # 头像
-    # avatar = models.FileField(upload_to='avatar/',default='static/imgs/default.png')    # 头像字段的正确写法
+    # avatar = models.FileField(upload_to='static/avatar',default='static/avatar/default.png')    # 头像
+    avatar = models.FileField(upload_to='avatar/',default='static/imgs/default.png')    # 头像字段的正确写法
 
     # blog_site = models.OneToOneField(to='BlogSite',null=True,to_field='id',on_delete=models.CASCADE)
     blog = models.OneToOneField(to='Blog',null=True)
@@ -87,6 +87,13 @@ class Article(models.Model):
     title = models.CharField(max_length=50) # 文章标题
     desc = models.CharField(max_length=255) # 文章描述
     create_time = models.DateTimeField(auto_now_add=True)   # 创建时间
+
+    # 点赞的数量
+    up_count = models.IntegerField(default=0)
+    # 踩灭的数量
+    down_count = models.IntegerField(default=0)
+    # 评论的数量
+    comment_count = models.IntegerField(default=0)
 
     user = models.ForeignKey(to='UserInfo') # 作者
     category = models.ForeignKey(to='Category',null=True)   # 文章分类
@@ -168,7 +175,7 @@ class ArtcleUpDown(models.Model):
         unique_together = (
             ('user','article')      # 同一个人只能给一篇文章点赞或踩灭一次
         ),
-        verbose_name = '点赞-踩灭',
+        verbose_name = '点赞',
         verbose_name_plural = verbose_name
 
 
