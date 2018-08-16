@@ -1,8 +1,5 @@
-from django.shortcuts import render,redirect,HttpResponse
-from blog01.forms import Register_Form
-from django.contrib import auth
-from django.contrib.auth.decorators  import login_required
-# from django.contrib.auth.models import User
+from django.shortcuts import render, redirect, HttpResponse
+from django.contrib.auth.decorators import login_required
 from blog01 import models
 
 
@@ -24,7 +21,7 @@ def register(request):
             # User.objects.create_user(**form_data)
             models.UserInfo.objects.create_user(**form_data)
             return HttpResponse('注册成功！')
-    return render(request,'register.html',{'form_obj':form_obj})
+    return render(request, 'register.html', {'form_obj': form_obj})
 
 
 ################ CBV 版的注册02 版本 #######################
@@ -35,26 +32,26 @@ from django.contrib import auth
 
 class Register_new(views.View):
 
-    def get(self,request):
+    def get(self, request):
         form_obj = Register_Form()  # form组件写html
-        return render(request,'register_new.html',{'form_obj':form_obj})
+        return render(request, 'register_new.html', {'form_obj': form_obj})
 
-    def post(self,request):
+    def post(self, request):
         print(222)
         print(request.POST)
-        res = {"code":0}
+        res = {"code": 0}
         # 先进行 验证码的校验
-        v_code = request.POST.get('v_code','')
+        v_code = request.POST.get('v_code', '')
         # 验证码正确后，使用form组件进行校验
         if v_code.upper() == request.session.get('v_code'):
             print('验证码填写正确！')
             form_obj = Register_Form(request.POST)  # form组件做校验
-            print('form_obj---->',form_obj)
+            print('form_obj---->', form_obj)
             # 用户输入的数据有效
             if form_obj.is_valid():
                 # 1、注册用户
                 form_cleaned_data = form_obj.cleaned_data
-                print('form_cleaned_data----->',form_cleaned_data)
+                print('form_cleaned_data----->', form_cleaned_data)
                 # 注意移除不需要的re_password
                 form_cleaned_data.pop('re_password')
                 print(form_cleaned_data)
@@ -63,14 +60,14 @@ class Register_new(views.View):
                 avatar_file = request.FILES.get('avatar')
 
                 # 利用auth 认证去校验注册的用户是否在数据库中已存在
-                user = auth.authenticate(username=form_cleaned_data['username'],password=form_cleaned_data['password'])
+                user = auth.authenticate(username=form_cleaned_data['username'], password=form_cleaned_data['password'])
                 if user:
                     #  数据库中有此用户则不需要注册
                     res["code"] = 3
                     res["msg"] = "用户名已占用！"
                 else:
                     #  数据库中没有此用户则需要注册
-                    models.UserInfo.objects.create_user(**form_cleaned_data , avatar = avatar_file)
+                    models.UserInfo.objects.create_user(**form_cleaned_data, avatar=avatar_file)
                     #  注册成功之后跳转到登录页面
                     res["msg"] = "/login/"
             # 用户填写的数据不符合要求
@@ -114,8 +111,8 @@ def index(request):
     :return: response对象
     '''
     # request.user.is_authenticated()   判断当前的request.user是否经过认证，经过认证返回True,没有经过认证返回False
-    print(request.user,request.user.is_authenticated())
-    return render(request,'index.html')
+    print(request.user, request.user.is_authenticated())
+    return render(request, 'index.html')
 
 
 ###################  bbs博客首页   ################
@@ -124,22 +121,21 @@ from utils.mypage import MyPage
 
 class Index(views.View):
 
-    def get(self,request):
+    def get(self, request):
         article_list = models.Article.objects.all()
-        print('article_list---->',article_list)
+        print('article_list---->', article_list)
         # 分页
         data_amount = article_list.count()  # 文章总数量
-        page_num = request.GET.get('page',1)    # 通过url 的get请求获取到当前页面
-        page_obj = MyPage(page_num,data_amount,per_page_data=2,url_prefix='index_new')
+        page_num = request.GET.get('page', 1)  # 通过url 的get请求获取到当前页面
+        page_obj = MyPage(page_num, data_amount, per_page_data=2, url_prefix='index_new')
         # 按照分页的设置对总数据进行切片
         data = article_list[page_obj.start:page_obj.end]
         page_html = page_obj.ret_html()
-        return render(request,'index_new.html',{"article_list":data,"page_htnl":page_html})
+        return render(request, 'index_new.html', {"article_list": data, "page_htnl": page_html})
 
-    def post(self,request):
-        res = {"code":0}
+    def post(self, request):
+        res = {"code": 0}
         return JsonResponse(res)
-
 
 
 def logout(request):
@@ -151,6 +147,7 @@ def logout(request):
     # 将当前请求的sessoin数据删除
     auth.logout(request)
     return redirect('/login/')
+
 
 @login_required
 def set_password(request):
@@ -164,9 +161,9 @@ def set_password(request):
     user = request.user
     err_msg = ''
     if request.method == 'POST':
-        old_password = request.POST.get('old_password','')  # 旧密码
-        new_password = request.POST.get('new_password','')  # 新密码
-        repeat_password = request.POST.get('repeat_password','')    # 确认密码
+        old_password = request.POST.get('old_password', '')  # 旧密码
+        new_password = request.POST.get('new_password', '')  # 新密码
+        repeat_password = request.POST.get('repeat_password', '')  # 确认密码
         # 检查旧密码是否正确
         if user.check_password(old_password):
             if not new_password:
@@ -179,8 +176,7 @@ def set_password(request):
                 return redirect('/login/')
         else:
             err_msg = '原密码输入错误！'
-    return render(request,'set_password.html',{'err_msg':err_msg})
-
+    return render(request, 'set_password.html', {'err_msg': err_msg})
 
 
 # ################ CBV 版的登录 #######################
@@ -251,7 +247,7 @@ def set_password(request):
 # # 生成一个准备写字的画笔
 #     from PIL import ImageDraw , ImageFont
 #     draw_obj = ImageDraw.Draw(image_obj)    # 在哪里写
-#     font_obj = ImageFont.truetype('static/font/kumo.ttf',size=28)   # 加载本地的字体文件
+#     font_obj = ImageFont.truetype('static/fonts/kumo.ttf',size=28)   # 加载本地的字体文件
 #
 # # 生成随机验证码
 #     tmp = []
@@ -266,7 +262,7 @@ def set_password(request):
 #             (i * 45 + 25 , 0), # 坐标---->（x,y）
 #             r,  # 内容
 #             fill=random_color(), # 颜色
-#             font=font_obj # 字体
+#             fonts=font_obj # 字体
 #         )
 #
 # # 得到最终的验证码
@@ -304,7 +300,7 @@ def set_password(request):
 # # 生成一个准备写字的画笔
 #     from PIL import ImageDraw , ImageFont
 #     draw_obj = ImageDraw.Draw(image_obj)    # 在哪里写
-#     font_obj = ImageFont.truetype('static/font/kumo.ttf',size=28)   # 加载本地的字体文件
+#     font_obj = ImageFont.truetype('static/fonts/kumo.ttf',size=28)   # 加载本地的字体文件
 #
 # # 生成随机验证码
 #     tmp = []
@@ -319,7 +315,7 @@ def set_password(request):
 #             (i * 45 + 25 , 0), # 坐标---->（x,y）
 #             r,  # 内容
 #             fill=random_color(), # 颜色
-#             font=font_obj # 字体
+#             fonts=font_obj # 字体
 #         )
 #
 # # 加干扰线
@@ -355,6 +351,8 @@ def set_password(request):
 ################ 登录验证码 版本4 #######################
 # 返回响应的时候告诉浏览器不要缓存
 from django.views.decorators.cache import never_cache
+
+
 @never_cache
 def v_code(request):
     # 随机生成图片
@@ -374,7 +372,7 @@ def v_code(request):
     # 生成一个准备写字的画笔
     from PIL import ImageDraw, ImageFont
     draw_obj = ImageDraw.Draw(image_obj)  # 在哪里写
-    font_obj = ImageFont.truetype('static/font/kumo.ttf', size=28)  # 加载本地的字体文件
+    font_obj = ImageFont.truetype('static/fonts/kumo.ttf', size=28)  # 加载本地的字体文件
 
     # 生成随机验证码
     tmp = []
@@ -410,13 +408,13 @@ def v_code(request):
     height = 35  # 图片高度(防止越界)
     for i in range(5):
         draw_obj.point(
-            [random.randint(0,width),random.randint(0,height)],
+            [random.randint(0, width), random.randint(0, height)],
             fill=random_color(),
         )
-        x = random.randint(0,width)
-        y = random.randint(0,height)
+        x = random.randint(0, width)
+        y = random.randint(0, height)
         draw_obj.arc(
-            (x,y,x+4,y+4),
+            (x, y, x + 4, y + 4),
             0,
             90,
             fill=random_color()
@@ -446,19 +444,19 @@ from blog01.forms02 import Login_Form
 
 class Login(views.View):
 
-    def get(self,request):
+    def get(self, request):
         form_obj = Login_Form()
-        return render(request,'login_ajax.html',{'form_obj':form_obj})
+        return render(request, 'login_ajax.html', {'form_obj': form_obj})
 
-    def post(self,request):
-        res = {"code":0}
+    def post(self, request):
+        res = {"code": 0}
         print(request.POST)
         username = request.POST.get("username")
         password = request.POST.get("password")
         v_code = request.POST.get('v_code')
         print(v_code)
         # 先判断验证码是否正确
-        if v_code.upper() != request.session.get('v_code',''):
+        if v_code.upper() != request.session.get('v_code', ''):
             print(111)
             res["code"] = 1
             res["msg"] = "验证码错误！"
@@ -480,9 +478,10 @@ class Login(views.View):
 ###########################  滑动验证码  ##############################
 from utils.geetest import GeetestLib
 
-#请在官网申请ID使用，示例ID不可使用
+# 请在官网申请ID使用，示例ID不可使用
 pc_geetest_id = "b46d1900d0a894591916ea94ea91bd2c"
 pc_geetest_key = "36fc3fe98530eea08dfc6ce76e3d24c4"
+
 
 def pcgetcaptcha(request):
     user_id = 'test'
@@ -493,9 +492,10 @@ def pcgetcaptcha(request):
     response_str = gt.get_response_str()
     return HttpResponse(response_str)
 
+
 # 滑动验证码版本的登录函数
 def login_huadong(request):
-    res = {"code":0}
+    res = {"code": 0}
     if request.method == "POST":
         gt = GeetestLib(pc_geetest_id, pc_geetest_key)
         challenge = request.POST.get(gt.FN_CHALLENGE, '')
@@ -511,10 +511,10 @@ def login_huadong(request):
             # 滑动验证码校验通过
             username = request.POST.get('username')
             password = request.POST.get('password')
-            user = auth.authenticate(username= username ,password = password)
+            user = auth.authenticate(username=username, password=password)
             if user:
                 # 用户名和密码正确
-                auth.login(request,user)
+                auth.login(request, user)
             else:
                 # 用户名或者密码不正确
                 res["code"] = 1
@@ -525,4 +525,107 @@ def login_huadong(request):
             res["msg"] = "验证码错误！"
         return JsonResponse(res)
     form_obj = Login_Form()
-    return render(request,'login_ajax_huadong.html',{"form_obj":form_obj})
+    return render(request, 'login_ajax_huadong.html', {"form_obj": form_obj})
+
+
+######################## BBS项目的个人博客站点 版本01 #######################################
+class Blog(views.View):
+
+    def get(self, request, username):
+        # 从数据库UserInfo表中找到此用户
+        user_objs_list = models.UserInfo.objects.filter(username=username)
+        print('user_objs_list---->', user_objs_list)
+        user_obj = user_objs_list.first()
+        article_category = user_obj.blog.tag_set.all()
+        print('article_category---->', article_category)
+        article_tag = user_obj.blog.tag_set.all()
+        print('article_tag---->', article_tag)
+        article_obj = user_obj.article_set.all()
+        print('article_obj--->', article_obj)
+
+        # 分页
+        data_amount = article_obj.count()  # 文章总数量
+        page_num = request.GET.get('page', 1)  # 通过url 的get请求获取到当前页面
+        page_obj = MyPage(page_num, data_amount, per_page_data=1, url_prefix='blog')
+        # 按照分页的设置对总数据进行切片
+        data = article_obj[page_obj.start:page_obj.end]
+        page_html = page_obj.ret_html()
+
+        return render(request, 'blog.html', {"user_obj": user_obj, "data": data, "page_html": page_html, })
+
+
+###################################### BBS项目的个人博客站点 版本02 #######################################
+from django.shortcuts import get_object_or_404
+from django.db.models import Count
+
+def blog_new(request,username):
+    '''
+    个人博客站点
+    :param request: request对象
+    :param username: 所要访问的用户
+    :return: response对象
+    '''
+    """
+    # 从数据库UserInfo表中找到所要访问的用户
+    user_obj = models.UserInfo.objects.filter(username=username).first()
+    print('user_obj1---->', user_obj)
+    # 由于用户可能会在url上乱输一气，导致user_obj 为none，此时需要判断
+    if not user_obj:
+        return HttpResponse('404……')
+    """
+
+    user_obj = get_object_or_404(models.UserInfo, username=username)    # 等同于引号中的内容
+    print('user_obj2---->', user_obj)
+
+    # 获取当前访问的用户所对应的个人博客站点（blog）
+    blog_obj = user_obj.blog
+
+    # 查找当前用户博客站点所对应的文章分类都有哪一些？
+    category_list = models.Category.objects.filter(blog = blog_obj)
+
+    # 查找当前用户博客站点所对应的文章标签都有哪一些？
+    tag_list = models.Tag.objects.filter(blog = blog_obj)
+
+
+    """
+    新知识点：extra -----> 半ORM半原生sql语句
+    对<当前用户博客站点>所对应的<所有文章>
+        按照：年月  进行：分组 & 查询
+    步骤如下：    
+     1、查找当前用户所对应的所有文章都有哪一些？
+    article_list = models.Article.objects.filter(user = user_obj)
+     2、将当前用户所有文章的创建时间 格式化成 年- 月 的格式，方便后续分组
+    create_time_format = article_list.extra(
+        select={
+            "create_y_m":"DATE_FORMAT(create_time,'%%Y年%%m月')"
+        }
+    ).values('create_y_m')
+    # create_time_format---> <QuerySet [{'create_y_m': '2018年08月'}, {'create_y_m': '2018年08月'}, {'create_y_m': '2017年06月'}, {'create_y_m': '2018年06月'}]>
+    print('create_time_format--->',create_time_format)
+     3、用上一步时间格式化得到的create_y_m字段做分组，统计出每个分组对应的文章数
+    article_count_obj = create_time_format.annotate(article_count = Count('id'))
+    # article_count_obj---> <QuerySet [{'create_y_m': '2018年08月', 'article_count': 2}, {'create_y_m': '2017年06月', 'article_count': 1}, {'create_y_m': '2018年06月', 'article_count': 1}]>
+    print('article_count_obj--->',article_count_obj)
+     4、把页面需要的日期归档和文章数字段取出来
+    archive_list = article_count_obj.values('create_y_m','article_count')
+    # archive_list---> <QuerySet [{'create_y_m': '2018年08月', 'article_count': 2}, {'create_y_m': '2017年06月', 'article_count': 1}, {'create_y_m': '2018年06月', 'article_count': 1}]>
+    print('archive_list--->',archive_list)
+    """
+    # 查找当前用户所对应的所有文章都有哪一些？
+    article_list = models.Article.objects.filter(user = user_obj)
+    # 对当前用户博客站点所对应的所有文章按照年月的格式化时间来分组，来进行日期归档和显示文章数量
+    archive_list = article_list.extra(
+        select={
+            "y_m":"DATE_FORMAT(create_time,'%%Y年%%m月')"
+        }
+    ).values('y_m').annotate(article_count = Count('id')).values('y_m','article_count')
+    print('archive_list--->',archive_list)
+
+    return render(request, 'blog_new.html',
+                  {"blog": blog_obj,
+                   "category_list":category_list,
+                   "tag_list":tag_list,
+                   "archive_list":archive_list,
+                   "article_list":article_list,
+                   "user_obj":user_obj
+                   })

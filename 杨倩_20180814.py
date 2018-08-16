@@ -228,7 +228,7 @@ def v_code(request):
 # 生成一个准备写字的画笔
     from PIL import ImageDraw , ImageFont
     draw_obj = ImageDraw.Draw(image_obj)    # 在哪里写
-    font_obj = ImageFont.truetype('static/font/kumo.ttf',size=28)   # 加载本地的字体文件
+    font_obj = ImageFont.truetype('static/fonts/kumo.ttf',size=28)   # 加载本地的字体文件
 
 # 生成随机验证码
     tmp = []
@@ -281,7 +281,7 @@ def v_code(request):
 # 生成一个准备写字的画笔
     from PIL import ImageDraw , ImageFont
     draw_obj = ImageDraw.Draw(image_obj)    # 在哪里写
-    font_obj = ImageFont.truetype('static/font/kumo.ttf',size=28)   # 加载本地的字体文件
+    font_obj = ImageFont.truetype('static/fonts/kumo.ttf',size=28)   # 加载本地的字体文件
 
 # 生成随机验证码
     tmp = []
@@ -348,7 +348,7 @@ def v_code(request):
     # 生成一个准备写字的画笔
     from PIL import ImageDraw, ImageFont
     draw_obj = ImageDraw.Draw(image_obj)  # 在哪里写
-    font_obj = ImageFont.truetype('static/font/kumo.ttf', size=28)  # 加载本地的字体文件
+    font_obj = ImageFont.truetype('static/fonts/kumo.ttf', size=28)  # 加载本地的字体文件
 
     # 生成随机验证码
     tmp = []

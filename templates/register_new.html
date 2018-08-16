@@ -451,10 +451,10 @@
                 console.log(res);
                 if (res.code === 2){
                     // 验证码错误
+                    window.message = res.msg;
                     $('#error-p').text( res.msg );
                 } else if (res.code === 0){
                     // form组件校验成功 且注册成功，从前端跳转到登录页面
-                    location.href = res.msg;
                 }else if(res.code === 3){
                     // form组件校验成功 但是，用户名已被占用
                     $('#id_username').next('span').text( res.msg );
@@ -462,6 +462,7 @@
                 }else if(res.code === 1){
                     // form组件校验失败，从后端获取到所有字段的错误信息，遍历获取出每个字段的错误信息提示，并在页面上展示出来
                     $.each(res.msg,function (k,v) {
+                        window.flag = res.code;
                         $('#id_' + k ).next().text( v[0] ).parent().addClass('has-error');
                     })
                 }
@@ -471,19 +472,28 @@
             }
         })
     });
+    let v_code  = $('#v-code');
     // 验证码输入错误，用户重新在验证码输入框输入内容时，原来输入的内容消失且错误提示消失
-    $('#v-code').focus(function () {
+    v_code.focus(function () {
         $(this).val('');
         $('#error-p').text('');
     });
 
     // 用户输入每个字段时出现错误，用户重新在输入框输入内容时，原来输入的内容消失且错误提示消失
     $('input.form-control').focus(function () {
-        $(this).val('').next('spam').text('').parent().removeClass('has-error');
+        console.log(window.flag);
+        if(window.flag ===  1){
+            $(this).val('').next('spam').text('').parent().removeClass('has-error');
+        }
     });
 
     // 用户输入用户名被占用，重新在输入框输入内容时，原来输入的内容消失且错误提示消失
-    $('#id_username').val('').next().text('');
+    $('#id_username').focus(function () {
+        if(window.flag === 3){
+            $('#id_username').val('').next().text('');
+            $('#username_form').removeClass('has-error');
+        }
+    });
 
     // 用户头像预览：当用户选中文件之后，也就是头像的input标签有值时触发以下事件
     $('#avatar').change(function () {
