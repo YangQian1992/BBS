@@ -2,7 +2,7 @@
     margin: 0;
 }
 .head{
-    height: 50px;
+    height: 78px;
     width: 100%;
     background: black;
     margin-bottom: 20px;
@@ -20,4 +20,8 @@
 }
 .article-footer span :first-child{
     margin-right: 5px;
+}
+.blog_title{
+    margin-left: 20px;
+    font-size: 20px;
 }

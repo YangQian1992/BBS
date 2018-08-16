@@ -9,7 +9,23 @@
 </head>
 <body>
     <!-- 个人博客站点的顶部菜单 开始 -->
-    <div class="head"></div>
+    <div class="head">
+        <p class="blog_title">{{ blog.title }}</p>
+        <! -- 个人博客站点的导航 开始 -->
+        <div>
+            <ul class="nav nav-pills">
+                <li role="presentation"><a href="/index_new/">博客园</a></li>
+                <li role="presentation"><a href="javascript:void(0);">首页</a></li>
+                <li role="presentation"><a href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+                <li role="presentation"><a href="https://msg.cnblogs.com/send/">联系</a></li>
+                <li role="presentation"><a href="http://feed.cnblogs.com/blog/u/422846/rss">订阅</a></li>
+                <li role="presentation"><a href="https://i.cnblogs.com/">管理</a></li>
+                <li role="presentation" style="float: right"><span>随笔-{{ user_obj.article_set.all.count}}&nbsp;&nbsp;评论-{{ user_obj.article_set.all.first.comment_count|add:user_obj.article_set.all.last.comment_count}}&nbsp;&nbsp;点赞-{{ user_obj.article_set.all.first.up_count|add:user_obj.article_set.all.last.up_count}}</span></li>
+            </ul>
+        </div>
+
+        <! -- 个人博客站点的导航 结束 -->
+    </div>
     <!-- 个人博客站点的顶部菜单 结束 -->
 
     <!-- 个人博客站点的页面内容 开始 -->
@@ -75,6 +91,7 @@
                 {% endfor %}
 
                 <!-- 分页 开始 -->
+                {{ page_html|safe }}
                 <!-- 分页 结束 -->
             </div>
             <!-- 右侧文章列表 结束 -->

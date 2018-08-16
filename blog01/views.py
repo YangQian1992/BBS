@@ -127,11 +127,11 @@ class Index(views.View):
         # 分页
         data_amount = article_list.count()  # 文章总数量
         page_num = request.GET.get('page', 1)  # 通过url 的get请求获取到当前页面
-        page_obj = MyPage(page_num, data_amount, per_page_data=2, url_prefix='index_new')
+        page_obj = MyPage(page_num, data_amount, per_page_data=2, url_prefix=request.path_info[1:-1])
         # 按照分页的设置对总数据进行切片
         data = article_list[page_obj.start:page_obj.end]
         page_html = page_obj.ret_html()
-        return render(request, 'index_new.html', {"article_list": data, "page_htnl": page_html})
+        return render(request, 'index_new.html', {"article_list": data, "page_html": page_html})
 
     def post(self, request):
         res = {"code": 0}
@@ -554,15 +554,17 @@ class Blog(views.View):
         return render(request, 'blog.html', {"user_obj": user_obj, "data": data, "page_html": page_html, })
 
 
-###################################### BBS项目的个人博客站点 版本02 #######################################
+###################################### BBS项目的个人博客站点 版本03 #######################################
 from django.shortcuts import get_object_or_404
 from django.db.models import Count
 
-def blog_new(request,username):
+def blog_new(request,username,*args):
+    print(username,args)
     '''
     个人博客站点
     :param request: request对象
     :param username: 所要访问的用户
+    :param *args: url传入的参数
     :return: response对象
     '''
     """
@@ -616,16 +618,47 @@ def blog_new(request,username):
     # 对当前用户博客站点所对应的所有文章按照年月的格式化时间来分组，来进行日期归档和显示文章数量
     archive_list = article_list.extra(
         select={
-            "y_m":"DATE_FORMAT(create_time,'%%Y年%%m月')"
+            "y_m":"DATE_FORMAT(create_time,'%%Y-%%m')"
         }
     ).values('y_m').annotate(article_count = Count('id')).values('y_m','article_count')
     print('archive_list--->',archive_list)
+
+    # 左侧侧边栏点击文章分类、文章标签、日期归档跳转到各分类中的文章页面
+    print('args--->',args)
+    # 判断args 是否为空，若是空，则说明没有点击左侧侧边栏上的各分类；若不为空，则说明进入各分类中的文章页面
+    if args:
+        if args[0] == 'category':
+            # 表示按照文章分类查询
+            article_list = article_list.filter(category__title=args[1])
+        elif args[0] == 'tag':
+            # 表示按照文章的标签查询
+            article_list = article_list.filter(tags__title=args[1])
+        else:
+            # 表示按照文章的日期归档查询（注意：在settings.py将时区改为False）
+            # 先将args[1]的值切割，注意用户可能在-左右乱写一通，故需要异常处理
+            try:
+                year,month  = args[1].split('-')
+                article_list = article_list.filter(create_time__year=year,create_time__month=month)
+            except Exception as e:
+                article_list = []
+
+    # 分页
+    data_amount = article_list.all().count()  # 文章总数量
+    page_num = request.GET.get('page', 1)  # 通过url 的get请求获取到当前页面
+    page_obj = MyPage(page_num, data_amount, per_page_data=2, url_prefix=request.path_info[1:-1])
+    # 按照分页的设置对总数据进行切片
+    data = article_list[page_obj.start:page_obj.end]
+    page_html = page_obj.ret_html()
 
     return render(request, 'blog_new.html',
                   {"blog": blog_obj,
                    "category_list":category_list,
                    "tag_list":tag_list,
                    "archive_list":archive_list,
-                   "article_list":article_list,
-                   "user_obj":user_obj
+                   "article_list":data,
+                   "user_obj":user_obj,
+                   "page_html":page_html,
                    })
+
+
+
