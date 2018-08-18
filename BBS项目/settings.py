@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog01.apps.Blog01Config',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'BBS项目.urls'
@@ -127,7 +129,6 @@ USE_TZ = False
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
-    os.path.join(BASE_DIR,'static1'),
 ]
 
 AUTH_USER_MODEL = 'blog01.UserInfo'
@@ -138,3 +139,9 @@ LOGIN_URL = '/login/'
 # 用户上传过来存放在后端数据库中的文件配置
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+INTERNAL_IPS = ['127.0.0.1', ]
+
+DEBUG_TOOLBAR_CONFIG = {
+    "JQUERY_URL": '//cdn.bootcss.com/jquery/2.2.4/jquery.min.js',
+}

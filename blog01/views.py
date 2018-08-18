@@ -37,8 +37,7 @@ class Register_new(views.View):
         return render(request, 'register_new.html', {'form_obj': form_obj})
 
     def post(self, request):
-        print(222)
-        print(request.POST)
+        print('request.POST-->',request.POST)
         res = {"code": 0}
         # 先进行 验证码的校验
         v_code = request.POST.get('v_code', '')
@@ -424,7 +423,7 @@ def v_code(request):
     v_code = ''.join(tmp)
 
     # 由于设置为全局变量，多个浏览器没办法区别验证码，故保存为全局变量是万万不可的！
-    # 将盖茨请求生成的验证码保存在该请求对应的session数据中
+    # 将get请求生成的验证码保存在该请求对应的session数据中
     request.session["v_code"] = v_code.upper()
 
     # 直接将生成的图片保存在内存中
@@ -660,5 +659,79 @@ def blog_new(request,username,*args):
                    "page_html":page_html,
                    })
 
+###### BBS项目的文章详情 版本01  ###########
+def article(request,username,id):
+    user_obj = get_object_or_404(models.UserInfo,username = username)
+    blog_obj = user_obj.blog
+    category_list = models.Category.objects.filter(blog = blog_obj)
+    tag_list = models.Tag.objects.filter(blog = blog_obj)
+    article = models.Article.objects.filter(user = user_obj,id = id).first()
+    archive_list = models.Article.objects.filter(user= user_obj).all().extra(
+        select={
+            "y_m":"DATE_FORMAT(create_time,'%%Y-%%m')"
+        }
+    ).values('y_m').annotate(article_count = Count('id')).values('y_m','article_count')
+
+    return render(request,'article.html',{
+        "blog": blog_obj,
+        "category_list": category_list,
+        "tag_list": tag_list,
+        "archive_list": archive_list,
+        "user_obj": user_obj,
+        "article":article,
+    })
 
 
+################ 点赞或踩灭函数 ######################
+from django.db import transaction
+from django.db.models import F
+
+def upOrdown(request):
+    if request.method == 'POST':
+        res = {"code":0}
+        print('request.POST--->',request.POST)  #<QueryDict: {'userId': ['5'], 'articleId': ['3'], 'isUp': ['true']}>
+        user_id = request.POST.get('userId')
+        article_id = request.POST.get('articleId')
+
+        is_up = request.POST.get('isUp')
+        print("is_up--->{},type(is_up)--->{}".format(is_up,type(is_up)))    # is_up--->true,type(is_up)---><class 'str'>
+        # 由于request.POST获取到的数据都是字符串形式，后续操作需要用到is_up是布尔值形式的，故需要转化成布尔值
+        is_up = True if is_up.upper() == 'TRUE' else False
+
+    # 5. 不能给自己的文章点赞
+        # 首先获取到数据库中是否有给自己文章点赞或踩灭的记录
+        article_obj = models.Article.objects.filter(id = article_id , user_id = user_id)
+        print('article_obj--->',article_obj)
+        # 如果有给自己文章点赞或踩灭的
+        if article_obj:
+            print(111)
+            res["code"] = 1
+            res["msg"] = "不能给自己的文章点赞！" if is_up else "不能给自己的文章踩灭！"
+        else:
+    # 3. 同一个人只能给同一篇文章点赞一次 且 4. 点赞或踩灭只能二选一
+            # 3.1 首先判断一下当前这个人和这篇文章 在点赞表中 有没有记录(对象)
+            is_exist = models.ArtcleUpDown.objects.filter(user_id = user_id,article_id = article_id).first()
+            # 3.2.a 如果有记录，就直接返回错误提示信息
+            if is_exist:
+                print(222)
+                res["code"] = 2
+                # 3.3.a 表示已经点赞过或踩灭过（点赞或踩灭只能二选一）
+                res["msg"] = "已经点赞过！" if is_exist.updown else "已经踩灭过！"
+            else:
+                print(333)
+                # 3.2.b 如果没有记录，就真正点赞或踩灭（注意：事务操作）
+                with transaction.atomic():
+                    # 3.3.b 先创建点赞或踩灭的记录(往数据库中添加记录)
+                    models.ArtcleUpDown.objects.create(user_id = user_id,article_id = article_id,updown= is_up)
+                    # 3.4.b 再更新文章表中的点赞数和踩灭数
+                    if is_up:
+                        # 表示点赞，更新文章表中的点赞数
+                        models.Article.objects.filter(id=article_id).update(up_count = F('up_count') + 1 )
+                    else:
+                        # 表示踩灭，更新文章表中的踩灭数
+                        models.Article.objects.filter(id = article_id).update(down_count = F('down_count') + 1 )
+
+                    # 3.5.b 往点赞表中成功添加记录 并 成功更新文章表中的点赞数和踩灭数， 然后进行添加提示信息
+                    res["msg"] = "点赞成功！" if is_up else  "踩灭成功！"
+
+        return JsonResponse(res)

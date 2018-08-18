@@ -45,4 +45,19 @@ urlpatterns = [
     url(r'^index_new/$', views.Index.as_view()),
     ############  BBS项目的个人博客站点  ############
     url(r'^blog/',include(blog01_url)),
+    ############  点赞或者踩灭  ############
+    url(r'^upOrdown/$',views.upOrdown),
+
+
+    url(r'^$',views.Index.as_view()),
 ]
+
+
+from django.conf import settings
+from django.conf.urls import include, url
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

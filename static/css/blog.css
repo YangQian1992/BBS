@@ -25,3 +25,51 @@
     margin-left: 20px;
     font-size: 20px;
 }
+
+/* 点赞或踩灭样式区 */
+.up_down{
+    height: 100px;
+    margin-bottom: 100px;
+}
+.diggit {
+    float: left;
+    width: 46px;
+    height: 52px;
+    background: url('/static/imgs/upup.gif') no-repeat;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 2px;
+    padding-top: 5px
+}
+
+.diggnum {
+    font-size: 14px;
+    color: #075db3;
+}
+
+.buryit {
+    float: right;
+    margin-left: 20px;
+    width: 46px;
+    height: 52px;
+    background: url('/static/imgs/downdown.gif') no-repeat;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 2px;
+    padding-top: 5px
+}
+
+.burynum {
+    font-size: 14px;
+    color: #075db3;
+}
+
+.diggword {
+    margin-top: 5px;
+    margin-left: 0;
+    font-size: 12px;
+    color: red;
+
+    display:none;
+
+}

@@ -29,7 +29,7 @@
     <!-- 个人博客站点的顶部菜单 结束 -->
 
     <!-- 个人博客站点的页面内容 开始 -->
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <!-- 左侧侧边栏 开始 -->
             <div class="col-md-2">
@@ -74,7 +74,7 @@
                 <!-- 文章 开始 -->
                 <div class="article">
                     <div class="media">
-                        <h3 class="media-heading">{{ article.title }}</h3>
+                        <a href="/blog/{{ user_obj.username }}/article/{{ article.id }}/"><h3 class="media-heading">{{ article.title }}</h3></a>
                         <div class="media-body">
                             <div class="article-desc">
                                 {{ article.desc }}
