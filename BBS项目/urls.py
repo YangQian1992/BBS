@@ -48,7 +48,6 @@ urlpatterns = [
     ############  点赞或者踩灭  ############
     url(r'^upOrdown/$',views.upOrdown),
 
-
     url(r'^$',views.Index.as_view()),
 ]
 

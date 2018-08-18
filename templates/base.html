@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block page-title %}
+
+    {% endblock page-title %}
+
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/blog.css">
+
+    {% block page-css %}
+    
+    {% endblock %}
+</head>
+<body>
+    <!-- 个人博客站点的顶部菜单 开始 -->
+    <div class="head">
+        {% load inclusion_tag_daohang %}
+        {% daohang username %}
+    </div>
+    <!-- 个人博客站点的顶部菜单 结束 -->
+
+    <!-- 个人博客站点的页面内容 开始 -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 左侧侧边栏 开始 (inclusion_tag组件)-->
+            <div class="col-md-2">
+                {% load inclusion_tag_left-menu %}
+                {% left_menu username %}
+            </div>
+            <!-- 左侧侧边栏 结束 -->
+
+            <!-- 右侧文章列表 开始 -->
+            <div class="col-md-10">
+                {% block page-main %}
+
+                {% endblock page-main %}
+            </div>
+            <!-- 右侧文章列表 结束 -->
+        </div>
+    </div>
+    <!-- 个人博客站点的页面内容 结束 -->
+</body>
+<script src="/static/js/jquery-3.1.1.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+{% block page-js %}
+
+{% endblock %}
+</html>

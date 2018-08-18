@@ -37,7 +37,7 @@ class Register_new(views.View):
         return render(request, 'register_new.html', {'form_obj': form_obj})
 
     def post(self, request):
-        print('request.POST-->',request.POST)
+        print('request.POST-->', request.POST)
         res = {"code": 0}
         # 先进行 验证码的校验
         v_code = request.POST.get('v_code', '')
@@ -557,73 +557,21 @@ class Blog(views.View):
 from django.shortcuts import get_object_or_404
 from django.db.models import Count
 
-def blog_new(request,username,*args):
-    print(username,args)
-    '''
-    个人博客站点
-    :param request: request对象
-    :param username: 所要访问的用户
-    :param *args: url传入的参数
-    :return: response对象
-    '''
-    """
-    # 从数据库UserInfo表中找到所要访问的用户
+
+def blog_new(request, username, *args):
     user_obj = models.UserInfo.objects.filter(username=username).first()
-    print('user_obj1---->', user_obj)
-    # 由于用户可能会在url上乱输一气，导致user_obj 为none，此时需要判断
-    if not user_obj:
-        return HttpResponse('404……')
-    """
-
-    user_obj = get_object_or_404(models.UserInfo, username=username)    # 等同于引号中的内容
-    print('user_obj2---->', user_obj)
-
-    # 获取当前访问的用户所对应的个人博客站点（blog）
-    blog_obj = user_obj.blog
-
-    # 查找当前用户博客站点所对应的文章分类都有哪一些？
-    category_list = models.Category.objects.filter(blog = blog_obj)
-
-    # 查找当前用户博客站点所对应的文章标签都有哪一些？
-    tag_list = models.Tag.objects.filter(blog = blog_obj)
-
-
-    """
-    新知识点：extra -----> 半ORM半原生sql语句
-    对<当前用户博客站点>所对应的<所有文章>
-        按照：年月  进行：分组 & 查询
-    步骤如下：    
-     1、查找当前用户所对应的所有文章都有哪一些？
-    article_list = models.Article.objects.filter(user = user_obj)
-     2、将当前用户所有文章的创建时间 格式化成 年- 月 的格式，方便后续分组
-    create_time_format = article_list.extra(
-        select={
-            "create_y_m":"DATE_FORMAT(create_time,'%%Y年%%m月')"
-        }
-    ).values('create_y_m')
-    # create_time_format---> <QuerySet [{'create_y_m': '2018年08月'}, {'create_y_m': '2018年08月'}, {'create_y_m': '2017年06月'}, {'create_y_m': '2018年06月'}]>
-    print('create_time_format--->',create_time_format)
-     3、用上一步时间格式化得到的create_y_m字段做分组，统计出每个分组对应的文章数
-    article_count_obj = create_time_format.annotate(article_count = Count('id'))
-    # article_count_obj---> <QuerySet [{'create_y_m': '2018年08月', 'article_count': 2}, {'create_y_m': '2017年06月', 'article_count': 1}, {'create_y_m': '2018年06月', 'article_count': 1}]>
-    print('article_count_obj--->',article_count_obj)
-     4、把页面需要的日期归档和文章数字段取出来
-    archive_list = article_count_obj.values('create_y_m','article_count')
-    # archive_list---> <QuerySet [{'create_y_m': '2018年08月', 'article_count': 2}, {'create_y_m': '2017年06月', 'article_count': 1}, {'create_y_m': '2018年06月', 'article_count': 1}]>
-    print('archive_list--->',archive_list)
-    """
-    # 查找当前用户所对应的所有文章都有哪一些？
-    article_list = models.Article.objects.filter(user = user_obj)
+    blog = user_obj.blog
+    article_list = models.Article.objects.filter(user=user_obj)
     # 对当前用户博客站点所对应的所有文章按照年月的格式化时间来分组，来进行日期归档和显示文章数量
     archive_list = article_list.extra(
         select={
-            "y_m":"DATE_FORMAT(create_time,'%%Y-%%m')"
+            "y_m": "DATE_FORMAT(create_time,'%%Y-%%m')"
         }
-    ).values('y_m').annotate(article_count = Count('id')).values('y_m','article_count')
-    print('archive_list--->',archive_list)
+    ).values('y_m').annotate(article_count=Count('id')).values('y_m', 'article_count')
+    print('archive_list--->', archive_list)
 
     # 左侧侧边栏点击文章分类、文章标签、日期归档跳转到各分类中的文章页面
-    print('args--->',args)
+    print('args--->', args)
     # 判断args 是否为空，若是空，则说明没有点击左侧侧边栏上的各分类；若不为空，则说明进入各分类中的文章页面
     if args:
         if args[0] == 'category':
@@ -636,8 +584,8 @@ def blog_new(request,username,*args):
             # 表示按照文章的日期归档查询（注意：在settings.py将时区改为False）
             # 先将args[1]的值切割，注意用户可能在-左右乱写一通，故需要异常处理
             try:
-                year,month  = args[1].split('-')
-                article_list = article_list.filter(create_time__year=year,create_time__month=month)
+                year, month = args[1].split('-')
+                article_list = article_list.filter(create_time__year=year, create_time__month=month)
             except Exception as e:
                 article_list = []
 
@@ -650,67 +598,57 @@ def blog_new(request,username,*args):
     page_html = page_obj.ret_html()
 
     return render(request, 'blog_new.html',
-                  {"blog": blog_obj,
-                   "category_list":category_list,
-                   "tag_list":tag_list,
-                   "archive_list":archive_list,
-                   "article_list":data,
-                   "user_obj":user_obj,
-                   "page_html":page_html,
+                  {"username": username,
+                   "blog": blog,
+                   "article_list": data,
+                   "page_html": page_html,
                    })
 
-###### BBS项目的文章详情 版本01  ###########
-def article(request,username,id):
-    user_obj = get_object_or_404(models.UserInfo,username = username)
-    blog_obj = user_obj.blog
-    category_list = models.Category.objects.filter(blog = blog_obj)
-    tag_list = models.Tag.objects.filter(blog = blog_obj)
-    article = models.Article.objects.filter(user = user_obj,id = id).first()
-    archive_list = models.Article.objects.filter(user= user_obj).all().extra(
-        select={
-            "y_m":"DATE_FORMAT(create_time,'%%Y-%%m')"
-        }
-    ).values('y_m').annotate(article_count = Count('id')).values('y_m','article_count')
 
-    return render(request,'article.html',{
-        "blog": blog_obj,
-        "category_list": category_list,
-        "tag_list": tag_list,
-        "archive_list": archive_list,
-        "user_obj": user_obj,
-        "article":article,
-    })
+###### BBS项目的文章详情 版本01  ###########
+def article(request, username, id):
+    user_obj = get_object_or_404(models.UserInfo, username=username)
+    blog = user_obj.blog
+    article = models.Article.objects.filter(user=user_obj, id=id).first()
+
+    return render(request, 'article.html',
+                  {
+                      "username": username,
+                      "article": article,
+                      "blog": blog,
+                  })
 
 
 ################ 点赞或踩灭函数 ######################
 from django.db import transaction
 from django.db.models import F
 
+
 def upOrdown(request):
     if request.method == 'POST':
-        res = {"code":0}
-        print('request.POST--->',request.POST)  #<QueryDict: {'userId': ['5'], 'articleId': ['3'], 'isUp': ['true']}>
+        res = {"code": 0}
+        print('request.POST--->', request.POST)  # <QueryDict: {'userId': ['5'], 'articleId': ['3'], 'isUp': ['true']}>
         user_id = request.POST.get('userId')
         article_id = request.POST.get('articleId')
 
         is_up = request.POST.get('isUp')
-        print("is_up--->{},type(is_up)--->{}".format(is_up,type(is_up)))    # is_up--->true,type(is_up)---><class 'str'>
+        print("is_up--->{},type(is_up)--->{}".format(is_up, type(is_up)))  # is_up--->true,type(is_up)---><class 'str'>
         # 由于request.POST获取到的数据都是字符串形式，后续操作需要用到is_up是布尔值形式的，故需要转化成布尔值
         is_up = True if is_up.upper() == 'TRUE' else False
 
-    # 5. 不能给自己的文章点赞
+        # 5. 不能给自己的文章点赞
         # 首先获取到数据库中是否有给自己文章点赞或踩灭的记录
-        article_obj = models.Article.objects.filter(id = article_id , user_id = user_id)
-        print('article_obj--->',article_obj)
+        article_obj = models.Article.objects.filter(id=article_id, user_id=user_id)
+        print('article_obj--->', article_obj)
         # 如果有给自己文章点赞或踩灭的
         if article_obj:
             print(111)
             res["code"] = 1
             res["msg"] = "不能给自己的文章点赞！" if is_up else "不能给自己的文章踩灭！"
         else:
-    # 3. 同一个人只能给同一篇文章点赞一次 且 4. 点赞或踩灭只能二选一
+            # 3. 同一个人只能给同一篇文章点赞一次 且 4. 点赞或踩灭只能二选一
             # 3.1 首先判断一下当前这个人和这篇文章 在点赞表中 有没有记录(对象)
-            is_exist = models.ArtcleUpDown.objects.filter(user_id = user_id,article_id = article_id).first()
+            is_exist = models.ArtcleUpDown.objects.filter(user_id=user_id, article_id=article_id).first()
             # 3.2.a 如果有记录，就直接返回错误提示信息
             if is_exist:
                 print(222)
@@ -722,16 +660,16 @@ def upOrdown(request):
                 # 3.2.b 如果没有记录，就真正点赞或踩灭（注意：事务操作）
                 with transaction.atomic():
                     # 3.3.b 先创建点赞或踩灭的记录(往数据库中添加记录)
-                    models.ArtcleUpDown.objects.create(user_id = user_id,article_id = article_id,updown= is_up)
+                    models.ArtcleUpDown.objects.create(user_id=user_id, article_id=article_id, updown=is_up)
                     # 3.4.b 再更新文章表中的点赞数和踩灭数
                     if is_up:
                         # 表示点赞，更新文章表中的点赞数
-                        models.Article.objects.filter(id=article_id).update(up_count = F('up_count') + 1 )
+                        models.Article.objects.filter(id=article_id).update(up_count=F('up_count') + 1)
                     else:
                         # 表示踩灭，更新文章表中的踩灭数
-                        models.Article.objects.filter(id = article_id).update(down_count = F('down_count') + 1 )
+                        models.Article.objects.filter(id=article_id).update(down_count=F('down_count') + 1)
 
                     # 3.5.b 往点赞表中成功添加记录 并 成功更新文章表中的点赞数和踩灭数， 然后进行添加提示信息
-                    res["msg"] = "点赞成功！" if is_up else  "踩灭成功！"
+                    res["msg"] = "点赞成功！" if is_up else "踩灭成功！"
 
         return JsonResponse(res)

@@ -1,177 +1,104 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ article.title }}&nbsp;-&nbsp;{{ blog.title }}&nbsp;-&nbsp;博客园</title>
-    <link rel="stylesheet" href="/static/css/bootstrap.css">
+{% extends 'base.html' %}
+
+{% block page-title %}
+    <title>{{ blog.title }}&nbsp;-&nbsp;博客园</title>
+{% endblock page-title %}
+
+{% block page-css %}
     <link rel="stylesheet" href="/static/css/article.css">
     <link rel="stylesheet" href="/static/css/blog.css">
     <link rel="stylesheet" href="/media/theme/{{ blog.theme }}">
-</head>
-{% csrf_token %}
-<body>
-<!-- 个人博客站点的顶部菜单 开始 -->
-<div class="head">
-    <p class="blog_title">{{ blog.title }}</p>
-    <! -- 个人博客站点的导航 开始 -->
-    <div>
-        <ul class="nav nav-pills">
-            <li role="presentation"><a href="/index_new/">博客园</a></li>
-            <li role="presentation"><a href="javascript:void(0);">首页</a></li>
-            <li role="presentation"><a href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
-            <li role="presentation"><a href="https://msg.cnblogs.com/send/">联系</a></li>
-            <li role="presentation"><a href="http://feed.cnblogs.com/blog/u/422846/rss">订阅</a></li>
-            <li role="presentation"><a href="https://i.cnblogs.com/">管理</a></li>
-            <li role="presentation" style="float: right">
-                <span>随笔-{{ user_obj.article_set.all.count }}&nbsp;&nbsp;评论-{{ user_obj.article_set.all.first.comment_count|add:user_obj.article_set.all.last.comment_count }}&nbsp;&nbsp;点赞-{{ user_obj.article_set.all.first.up_count|add:user_obj.article_set.all.last.up_count }}</span>
-            </li>
-        </ul>
-    </div>
+{% endblock page-css %}
 
-    <! -- 个人博客站点的导航 结束 -->
-</div>
-<!-- 个人博客站点的顶部菜单 结束 -->
+{% block page-main %}
+    {% csrf_token %}
+    <a href="#"><h3>{{ article.title }}</h3></a>
+    <!-- 文章详情内容 开始 -->
+    {{ article.articledetail.content|safe }}
+    <!-- 文章详情内容 结束 -->
 
-<!-- 个人博客站点的页面内容 开始 -->
-<div class="container-fluid">
-    <div class="row">
-        <!-- 左侧侧边栏 开始 -->
-        <div class="col-md-2">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="penel-title">文章分类</h3>
-                </div>
-                <div class="panel-body">
-                    {% for category in category_list %}
-                        <p>
-                            <a href="/blog/{{ user_obj.username }}/category/{{ category.title }}/">{{ category.title }}({{ category.article_set.all.count }})</a>
-                        </p>
-                    {% endfor %}
-                </div>
+    <!-- 点赞或踩灭 开始 -->
+    <div class="up_down">
+        <div id="div_digg">
+            <!-- 点赞 开始 -->
+            <div class="diggit digg">
+                <span class="diggnum" id="digg_count">{{ article.up_count }}</span>
             </div>
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="penel-title">文章标签</h3>
-                </div>
-                <div class="panel-body">
-                    {% for tag in tag_list %}
-                        <p>
-                            <a href="/blog/{{ user_obj.username }}/tag/{{ tag.title }}/">{{ tag.title }}({{ tag.article_set.all.count }})</a>
-                        </p>
-                    {% endfor %}
+            <!-- 点赞 结束 -->
 
-                </div>
+            <!-- 踩灭 开始 -->
+            <div class="buryit digg">
+                <span class="burynum" id="bury_count">{{ article.down_count }}</span>
             </div>
+            <!-- 踩灭 结束 -->
 
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h3 class="penel-title">日期归档</h3>
-                </div>
-                <div class="panel-body">
-                    {% for archive in archive_list %}
-                        <p>
-                            <a href="/blog/{{ user_obj.username }}/archive/{{ archive.y_m }}/">{{ archive.y_m }}({{ archive.article_count }})</a>
-                        </p>
-                    {% endfor %}
-                </div>
+            <div class="clear"></div>
+
+            <!-- 提示信息 开始 -->
+            {#            <div class="diggword" id="digg_tips">请先<a href="/login/">登录</a>#}
+            <div class="diggword" id="digg_tips">请先<a href="/login/?next={{ request.get_full_path }}">登录</a>
             </div>
+            <!-- 提示信息 结束 -->
+
         </div>
-        <!-- 左侧侧边栏 结束 -->
-
-        <!-- 右侧文章列表 开始 -->
-        <div class="col-md-10">
-            <a href="#"><h3>{{ article.title }}</h3></a>
-            <!-- 文章详情内容 开始 -->
-            {{ article.articledetail.content|safe }}
-            <!-- 文章详情内容 结束 -->
-                
-            <!-- 点赞或踩灭 开始 -->
-            <div class="up_down">
-                <div id="div_digg">
-                    <!-- 点赞 开始 -->
-                    <div class="diggit digg">
-                        <span class="diggnum" id="digg_count">{{ article.up_count }}</span>
-                    </div>
-                    <!-- 点赞 结束 -->
-
-                    <!-- 踩灭 开始 -->
-                    <div class="buryit digg">
-                        <span class="burynum" id="bury_count">{{ article.down_count }}</span>
-                    </div>
-                    <!-- 踩灭 结束 -->
-
-                    <div class="clear"></div>
-
-                    <!-- 提示信息 开始 -->
-                    <div class="diggword" id="digg_tips">请先<a href="/login/">登录</a>
-                    </div>
-                    <!-- 提示信息 结束 -->
-
-                </div>
-            </div>
-            <!-- 点赞或踩灭 结束 -->
-        </div>
-        <!-- 右侧文章列表 结束 -->
     </div>
-</div>
-<!-- 个人博客站点的页面内容 结束 -->
+    <!-- 点赞或踩灭 结束 -->
+{% endblock page-main %}
 
+{% block page-js %}
+    <script src="/static/js/setupAjax.js"></script>
+    <script>
+        // 给点赞和反对按钮绑定点击事件（用同一个类digg来绑定）
+        $('.digg').click(function () {
+            // 1. 首先判断有没有登录？
+            if (!'{{ request.user.username }}') {
+                // 如果没有登录就将提示信息显示出来
+                $('#digg_tips').show();
+            }
 
-</body>
-<script src="/static/js/jquery-3.1.1.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/setupAjax.js"></script>
-<script>
-    // 给点赞和反对按钮绑定点击事件（用同一个类digg来绑定）
-    $('.digg').click(function () {
-        // 1. 首先判断有没有登录？
-        if(!'{{ request.user.username }}'){
-            // 如果没有登录就将提示信息显示出来
-            $('#digg_tips').show();
-        }
+            // 已经登录可以点赞或踩灭
+            let userId = '{{ request.user.id }}';    // 谁 点赞或踩灭
+            let articleId = '{{ article.id }}';       // 给 哪一篇文章 点赞或踩灭
 
-        // 已经登录可以点赞或踩灭
-        let userId = '{{ request.user.id }}';    // 谁 点赞或踩灭
-        let articleId = '{{ article.id }}';       // 给 哪一篇文章 点赞或踩灭
-
-        // 如何区分是点赞还是踩灭？（通过查看标签中是否含有diggit类来区分是否为点赞）
-        let isUp = $(this).hasClass('diggit');  // 是否为点赞
-        // 向后端发请求
-        $.ajax({
-            url:'/upOrdown/',
-            type:'post',
-            data:{
-                userId:userId,
-                articleId:articleId,
-                isUp:isUp,
-            },
-            success:function (res) {
-                console.log(res);
-                if(res.code === 1){
-                    // 不能给自己文章点赞或踩灭
-                   $('#digg_tips').show().text(res.msg);
-                }else{
-                    if(res.code === 2){
-                        // 点赞过或踩灭过
+            // 如何区分是点赞还是踩灭？（通过查看标签中是否含有diggit类来区分是否为点赞）
+            let isUp = $(this).hasClass('diggit');  // 是否为点赞
+            // 向后端发请求
+            $.ajax({
+                url: '/upOrdown/',
+                type: 'post',
+                data: {
+                    userId: userId,
+                    articleId: articleId,
+                    isUp: isUp,
+                },
+                success: function (res) {
+                    console.log(res);
+                    if (res.code === 1) {
+                        // 不能给自己文章点赞或踩灭
                         $('#digg_tips').show().text(res.msg);
-                    }else{
-                        // 1. 先把点赞数或者踩灭数更新一下
-                        if(isUp){
-                            // 更新点赞数
-                            let $UpSpan = $('#digg_count');
-                            $UpSpan.text(+$UpSpan.text() +1);
+                    } else {
+                        if (res.code === 2) {
+                            // 点赞过或踩灭过
                             $('#digg_tips').show().text(res.msg);
-                        }else{
-                            let $DownSpan = $('#bury_count');
-                            $DownSpan.text(+$DownSpan.text()+1);
-                            $('#digg_tips').show().text(res.msg);
-                        // 2. 再显示提示信息
-                        {#$('#digg_tips').show().text(res.msg);#}
+                        } else {
+                            // 1. 先把点赞数或者踩灭数更新一下
+                            if (isUp) {
+                                // 更新点赞数
+                                let $UpSpan = $('#digg_count');
+                                $UpSpan.text(+$UpSpan.text() + 1);
+                                // 2.a 再显示提示信息
+                                $('#digg_tips').show().text(res.msg);
+                            } else {
+                                let $DownSpan = $('#bury_count');
+                                $DownSpan.text(+$DownSpan.text() + 1);
+                                // 2.b 再显示提示信息
+                                $('#digg_tips').show().text(res.msg);
+                            }
                         }
                     }
                 }
-            }
+            })
         })
-    })
-</script>
-</html>
+    </script>
+{% endblock page-js %}
+
