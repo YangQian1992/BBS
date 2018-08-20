@@ -150,7 +150,7 @@ class Comment(models.Model):
     create_time = models.DateTimeField(auto_now_add=True) # 评论时间
     article = models.ForeignKey(to='Article') # 外键关联文章，一篇文章可以有多条评论
     user = models.ForeignKey(to='UserInfo')
-    parent_comment = models.ForeignKey('self',null=True,)   # 父评论，自己关联自己
+    parent_comment = models.ForeignKey('self',null=True,blank=True)   # 父评论，自己关联自己
 
     def __str__(self):
         return self.content

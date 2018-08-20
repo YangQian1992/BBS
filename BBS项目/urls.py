@@ -47,6 +47,8 @@ urlpatterns = [
     url(r'^blog/',include(blog01_url)),
     ############  点赞或者踩灭  ############
     url(r'^upOrdown/$',views.upOrdown),
+    ############  评论  ############
+    url(r'^comment/$',views.comment),
 
     url(r'^$',views.Index.as_view()),
 ]

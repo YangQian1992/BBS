@@ -447,6 +447,7 @@ class Login(views.View):
         form_obj = Login_Form()
         return render(request, 'login_ajax.html', {'form_obj': form_obj})
 
+
     def post(self, request):
         res = {"code": 0}
         print(request.POST)
@@ -610,12 +611,14 @@ def article(request, username, id):
     user_obj = get_object_or_404(models.UserInfo, username=username)
     blog = user_obj.blog
     article = models.Article.objects.filter(user=user_obj, id=id).first()
+    comment_list = models.Comment.objects.filter(article=article)
 
     return render(request, 'article.html',
                   {
                       "username": username,
                       "article": article,
                       "blog": blog,
+                      "comment_list":comment_list,
                   })
 
 
@@ -670,6 +673,50 @@ def upOrdown(request):
                         models.Article.objects.filter(id=article_id).update(down_count=F('down_count') + 1)
 
                     # 3.5.b 往点赞表中成功添加记录 并 成功更新文章表中的点赞数和踩灭数， 然后进行添加提示信息
-                    res["msg"] = "点赞成功！" if is_up else "踩灭成功！"
+                res["msg"] = "点赞成功！" if is_up else "踩灭成功！"
+
+        return JsonResponse(res)
+
+################ 评论函数 ################
+def comment(request):
+    if request.method == "POST":
+        res = {"code":0}
+        # 获取父评论的id
+        parent_id = request.POST.get('parent_id')
+        # 获取用户的id
+        user_id = request.POST.get('user_id')
+        # 获取文章的id
+        article_id = request.POST.get('article_id')
+        # 获取评论的内容
+        content = request.POST.get('content')
+
+        # 向数据库中创建评论内容
+        with transaction.atomic():
+            # 1. 先去创建新评论
+            if parent_id:
+                # 添加子评论
+                comment_obj = models.Comment.objects.create(
+                    content= content,
+                    user_id=user_id,
+                    article_id=article_id,
+                    parent_comment_id=parent_id,
+                )
+            else:
+                # 添加父评论
+                comment_obj = models.Comment.objects.create(
+                    content=content,
+                    user_id=user_id,
+                    article_id=article_id,
+                )
+
+            # 2. 去更新该文章的评论数
+            models.Article.objects.filter(id=article_id).update(comment_count=F('comment_count') + 1)
+
+            res["data"] = {
+                "id":comment_obj.id,
+                "content":comment_obj.content,
+                "create_time":comment_obj.create_time,
+                "username":comment_obj.user.username,
+            }
 
         return JsonResponse(res)

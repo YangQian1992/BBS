@@ -40,7 +40,8 @@
         let username = $('#id_username').val();
         let password = $('#id_password').val();
         let vCode = $('#v-code').val();
-        // 发送ajax请求
+
+        // 发送ajax POST 请求
         $.ajax({
             url:'/login/',
             type:'post',

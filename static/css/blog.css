@@ -41,12 +41,10 @@
     margin-top: 2px;
     padding-top: 5px
 }
-
 .diggnum {
     font-size: 14px;
     color: #075db3;
 }
-
 .buryit {
     float: right;
     margin-left: 20px;
@@ -58,18 +56,28 @@
     margin-top: 2px;
     padding-top: 5px
 }
-
 .burynum {
     font-size: 14px;
     color: #075db3;
 }
-
 .diggword {
     margin-top: 5px;
     margin-left: 0;
     font-size: 12px;
     color: red;
-
     display:none;
+}
 
+/* 文章详情页 评论区样式 */
+.comment-header{
+    border-bottom:1px dotted rgb(204,204,204);
+}
+.comment-header>span{
+    margin-right:15px;
+}
+.comment-content{
+    padding:15px 0;
+}
+.list-group-item-text{
+    margin: 0;
 }
