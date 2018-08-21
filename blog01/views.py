@@ -454,6 +454,9 @@ class Login(views.View):
         username = request.POST.get("username")
         password = request.POST.get("password")
         v_code = request.POST.get('v_code')
+        # next_url = request.POST.get('next_url')
+        # next_url = next_url.split("=")[1]
+        # print(next_url)  # /blog/alex/article/3/
         print(v_code)
         # 先判断验证码是否正确
         if v_code.upper() != request.session.get('v_code', ''):
@@ -468,10 +471,13 @@ class Login(views.View):
                 # 表示用户名密码正确
                 # 让当前用户登录,给cookie 和 session 写入数据
                 auth.login(request, user)
+                # if next_url:
+                #     return redirect(next_url)
             else:
                 # 表示用户名或密码不正确
                 res["code"] = 1
                 res["msg"] = '用户名或密码不正确！'
+
         return JsonResponse(res)
 
 
@@ -720,3 +726,68 @@ def comment(request):
             }
 
         return JsonResponse(res)
+
+# 文章管理后台 主页
+def article_manage(request):
+    # 查找当前用户所写的文章有哪一些？
+    article_list = models.Article.objects.filter(user=request.user)
+    return render(request,'article_manage.html',{"article_list":article_list})
+
+# 文章管理后台 添加新文章
+from bs4 import BeautifulSoup
+
+def add_article(request):
+    if request.method == 'POST':
+        # 获取用户填写的文章内容
+        title = request.POST.get('article_title')
+        content = request.POST.get('article_content')
+        category_id = request.POST.get('article_category')
+
+        # 清洗用户发布的文章的内容，去掉script标签
+        soup = BeautifulSoup(content,'html.parser')
+        sricpt_list = soup.select('script')
+        for i in sricpt_list:
+            i.decompose()
+        # print(soup.text)
+        # print(soup.prettify())
+
+        # 将用户填写的文章内容写入数据库
+        with transaction.atomic():
+            # 1. 先创建文章记录
+            article_obj = models.Article.objects.create(
+                title = title,
+                desc = soup.text[0:150],
+                user = request.user,
+                category_id = category_id,
+            )
+            # 2. 创建文章详情记录
+            models.ArticleDetail.objects.create(
+                content = soup.prettify(),
+                article = article_obj,
+            )
+        return redirect('/blog/article_manage/')
+
+    # 查找当前用户的个人博客站点所用的所有文章分类有哪些？
+    category_list = models.Category.objects.filter(blog__userinfo = request.user)
+    return render(request,'add_article.html',{'category_list':category_list})
+
+
+# 富文本编辑器的图片上传
+import os
+from django.conf import settings
+
+def upload(request):
+    print(request.FILES)
+    # 设置一个错误集
+    res = {"error":0}
+    # 获取文件对象
+    file_obj = request.FILES.get('imgFile')
+    # 设置要上传文件的绝对地址
+    file_path = os.path.join(settings.MEDIA_ROOT,'article_imgs',file_obj.name)
+    # 将上传的图片文件保存在数据库中
+    with open(file_path,mode='wb') as f:
+        for chunk in file_obj.chunks():
+            f.write(chunk)
+    url = "/media/article_imgs/" + file_obj.name
+    res["url"] = url
+    return JsonResponse(res)

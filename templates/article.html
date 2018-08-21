@@ -39,11 +39,9 @@
                 <div class="diggword" id="digg_tips">请先<a href="/login/?next={{ request.get_full_path }}">登录</a>
                 </div>
                 <!-- 提示信息 结束 -->
-
             </div>
         </div>
     </div>
-
     <!-- 点赞或踩灭 结束 -->
 
     <!-- 评论展示区 开始 -->
@@ -172,18 +170,18 @@
 
                         // 创建评论成功，通过js在评论列表里添加一个新的评论
                         let commentHtml = `
-                    <div class="list-group-item">
-                        <h4 class="list-group-item-heading comment-header">
-                            <span>${ num }楼</span>
-                            <span>${ data.create_time }</span>
-                            <span>${ data.username }</span>
-                            <span class="pull-right replay">回复</span>
-                        </h4>
-                        <p class="list-group-item-text comment-content">
-                            ${ data.content }
-                        </p>
-                    </div>
-                    `;
+                            <div class="list-group-item">
+                                <h4 class="list-group-item-heading comment-header">
+                                    <span>${ num }楼</span>
+                                    <span>${ data.create_time }</span>
+                                    <span>${ data.username }</span>
+                                    <span class="pull-right replay">回复</span>
+                                </h4>
+                                <p class="list-group-item-text comment-content">
+                                    ${ data.content }
+                                </p>
+                            </div>
+                        `;
                         console.log(commentHtml);
                         $('.comment-list').append(commentHtml);
                         // 清空textarea
@@ -196,16 +194,16 @@
                 }
             })
         });
-        
+
         // 给回复按钮绑定事件
-        $('.comment-list').on('click','.replay',function () {
+        $('.comment-list').on('click', '.replay', function () {
             // 1. 光标聚焦在评论框
             // 2. 添加一个@xxx的提示
             let replayName = $(this).prev().text();
-            $('#new-comment').focus().val('@'+replayName+'\n');
+            $('#new-comment').focus().val('@' + replayName + '\n');
             // 把当前评论的id值，偷偷存到提交按钮中
             let pID = $(this).parent().parent().attr('my-id');
-            $('#submit-comment').data('pid',pID);
+            $('#submit-comment').data('pid', pID);
         })
     </script>
 {% endblock page-js %}

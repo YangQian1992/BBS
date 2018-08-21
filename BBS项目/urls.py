@@ -27,7 +27,7 @@ urlpatterns = [
     ############ 注册02 ############
     url(r'^register_new/$', views.Register_new.as_view()),
     ############ 登录 ############
-    url(r'^login/$', views.Login.as_view()),
+    url(r'^login/', views.Login.as_view()),
     ############ 简单的主页 ############
     url(r'^index/$', views.index),
     ############ 修改密码 ############
@@ -47,7 +47,7 @@ urlpatterns = [
     url(r'^blog/',include(blog01_url)),
     ############  点赞或者踩灭  ############
     url(r'^upOrdown/$',views.upOrdown),
-    ############  评论  ############
+    ############  评论楼  ############
     url(r'^comment/$',views.comment),
 
     url(r'^$',views.Index.as_view()),
