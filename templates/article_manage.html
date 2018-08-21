@@ -39,8 +39,8 @@
                             <td><a href="/blog/{{ article.user.username }}/article/{{ article.id }}/">{{ article.title }}</a></td>
                             <td>{{ article.comment_count }}</td>
                             <td>{{ article.up_count }}</td>
-                            <td><a href="">删除</a></td>
-                            <td><a href="">编辑</a></td>
+                            <td><a href="/blog/del_article/{{ article.id }}/">删除</a></td>
+                            <td><a href="/blog/edit_article/{{ article.id }}/">编辑</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

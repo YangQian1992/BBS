@@ -748,8 +748,6 @@ def add_article(request):
         sricpt_list = soup.select('script')
         for i in sricpt_list:
             i.decompose()
-        # print(soup.text)
-        # print(soup.prettify())
 
         # 将用户填写的文章内容写入数据库
         with transaction.atomic():
@@ -791,3 +789,41 @@ def upload(request):
     url = "/media/article_imgs/" + file_obj.name
     res["url"] = url
     return JsonResponse(res)
+
+# 文章管理后台 删除文章
+def del_article(request,id):
+    del_obj_list = models.Article.objects.filter(id=id)
+    if del_obj_list:
+        del_obj_list.delete()
+        return redirect('/blog/article_manage/')
+    else:
+        return HttpResponse('所输入的id找不到学生信息！')
+
+def edit_article(request,id):
+    article = models.Article.objects.filter(id=int(id)).first()
+    if request.method == 'POST':
+        # 获取用户填写的文章内容
+        title = request.POST.get('article_title')
+        content = request.POST.get('article_content')
+        category_id = request.POST.get('article_category')
+
+        # 清洗用户发布的文章的内容，去掉script标签
+        soup = BeautifulSoup(content,'html.parser')
+        sricpt_list = soup.select('script')
+        for i in sricpt_list:
+            i.decompose()
+
+        # 将用户填写的文章内容写入数据库
+        with transaction.atomic():
+            models.Article.objects.filter(id=int(id)).update(
+                title = title,
+                desc = soup.text[0:150],
+                user = request.user,
+                category_id = category_id,
+            )
+            models.ArticleDetail.objects.filter(article = article).update(
+                content = soup.prettify(),
+            )
+        return redirect('/blog/article_manage/')
+    category_list = models.Category.objects.filter(blog__userinfo = request.user)
+    return render(request,'edit_article.html',{'category_list':category_list,'article':article})

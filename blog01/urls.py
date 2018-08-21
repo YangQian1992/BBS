@@ -12,6 +12,12 @@ urlpatterns = [
     # 文章管理后台 上传图片
     url(r'^upload/$',views.upload),
 
+    # 文章管理后台 删除文章
+    url(r'^del_article/(\d+)',views.del_article),
+
+    # 文章管理后台 编辑文章
+    url(r'^edit_article/(\d+)/$', views.edit_article),
+
     # 个人博客站点 主页
     url(r'^(\w+)/$',views.blog_new),
 
@@ -20,6 +26,7 @@ urlpatterns = [
 
     # 文章详情页面
     url(r'^(\w+)/article/(\d+)/$',views.article),
+
 
 
 ]
@@ -35,5 +42,6 @@ urlpatterns = [
     url(r'^(\w+)/(category|tag|archive)/(\w+)/$',views.threeinone),
 
     ------  第三版 ↓（四合一）-----
+    
     url(r'^(\w+)/(category|tag|archive)/(.*)/$',views.blog_new),
 """
