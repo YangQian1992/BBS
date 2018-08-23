@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from blog01 import models
+import logging
+# 生成一个以当前文件名为名字的日志实例对象
+logger = logging.getLogger(__name__)
+# 生成一个名字是collect的日志实例对象
+collect_logger = logging.getLogger("collect")
 
 
 def register(request):
@@ -614,6 +619,9 @@ def blog_new(request, username, *args):
 
 ###### BBS项目的文章详情 版本01  ###########
 def article(request, username, id):
+    logger.debug("username".format(username))
+    logger.info("id".format(id))
+    collect_logger.warning("username-->{},id-->{}".format(username,id))
     user_obj = get_object_or_404(models.UserInfo, username=username)
     blog = user_obj.blog
     article = models.Article.objects.filter(user=user_obj, id=id).first()
@@ -731,6 +739,8 @@ def comment(request):
 def article_manage(request):
     # 查找当前用户所写的文章有哪一些？
     article_list = models.Article.objects.filter(user=request.user)
+    print("request.user",request.user)
+    print("article_list",article_list)
     return render(request,'article_manage.html',{"article_list":article_list})
 
 # 文章管理后台 添加新文章
