@@ -142,10 +142,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 INTERNAL_IPS = ['127.0.0.1', ]
 
+# 调试
 DEBUG_TOOLBAR_CONFIG = {
     "JQUERY_URL": '//cdn.bootcss.com/jquery/2.2.4/jquery.min.js',
 }
 
+# 日志文件配置
 BASE_LOG_DIR = os.path.join(BASE_DIR, "log")
 LOGGING = {
     'version': 1,   # 保留的关键字

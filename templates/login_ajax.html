@@ -40,11 +40,6 @@
         let username = $('#id_username').val();
         let password = $('#id_password').val();
         let vCode = $('#v-code').val();
-        {#let next_url = '{{ request.get_full_path }}';#}
-        {#console.log(next_url);#}
-
-        {#let next_url = window.location.search;#}
-        {#alert(next_url);#}
 
         // 发送ajax POST 请求
         $.ajax({

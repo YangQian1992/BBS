@@ -1,3 +1,53 @@
 [2018-08-23 18:05:29,552][Thread-16:8768][task_id:django.request][log.py:228][WARNING][Not Found: /favicon.ico]
 [2018-08-23 18:05:38,978][Thread-20:3808][task_id:blog01.views][views.py:623][INFO][id]
 [2018-08-23 18:05:38,978][Thread-20:3808][task_id:collect][views.py:624][WARNING][username-->alex,id-->3]
+[2018-08-23 19:54:50,461][Thread-3:828][task_id:django.request][base.py:152][WARNING][Not Found: /favicon.ico]
+[2018-08-24 15:31:43,139][Thread-3:2264][task_id:django.request][base.py:152][WARNING][Not Found: /media/]
+[2018-08-24 15:31:44,921][Thread-14:6468][task_id:django.request][base.py:152][WARNING][Not Found: /favicon.ico]
+[2018-08-24 15:31:47,652][Thread-15:5420][task_id:django.request][exception.py:135][ERROR][Internal Server Error: /blog/article_manage/]
+Traceback (most recent call last):
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\BBS项目\blog01\views.py", line 741, in article_manage
+    article_list = models.Article.objects.filter(user=request.user)
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\query.py", line 784, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\query.py", line 802, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\sql\query.py", line 1250, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\sql\query.py", line 1276, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\sql\query.py", line 1179, in build_filter
+    self.check_related_objects(field, value, opts)
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\sql\query.py", line 1078, in check_related_objects
+    for v in value:
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\utils\functional.py", line 239, in inner
+    return func(self._wrapped, *args)
+TypeError: 'AnonymousUser' object is not iterable
+[2018-08-24 15:31:59,979][Thread-18:4860][task_id:django.request][base.py:152][WARNING][Not Found: /media/]
+[2018-08-24 16:17:21,280][Thread-10:6388][task_id:django.security.csrf][csrf.py:160][WARNING][Forbidden (CSRF token missing or incorrect.): /blog/upload/]
+[2018-08-24 20:39:12,862][Thread-8:3736][task_id:blog01.views][views.py:623][INFO][id]
+[2018-08-24 20:39:12,863][Thread-8:3736][task_id:collect][views.py:624][WARNING][username-->alex,id-->11]
+[2018-08-24 20:39:20,133][Thread-16:7724][task_id:blog01.views][views.py:623][INFO][id]
+[2018-08-24 20:39:20,133][Thread-16:7724][task_id:collect][views.py:624][WARNING][username-->alex,id-->9]
+[2018-08-24 22:10:11,483][Thread-3:8120][task_id:django.request][base.py:152][WARNING][Not Found: /favicon.ico]
+[2018-08-24 22:25:59,422][Thread-3:6224][task_id:django.request][base.py:152][WARNING][Not Found: /favicon.ico]
+[2018-08-30 00:18:08,621][Thread-6:6836][task_id:django.request][base.py:152][WARNING][Not Found: /media/]
+[2018-08-30 00:18:09,229][Thread-17:1332][task_id:django.request][base.py:152][WARNING][Not Found: /favicon.ico]
+[2018-09-01 08:38:18,095][Thread-6:7080][task_id:django.request][base.py:152][WARNING][Not Found: /media/]
+[2018-09-01 08:38:19,409][Thread-17:2336][task_id:django.request][base.py:152][WARNING][Not Found: /favicon.ico]
+[2018-09-03 16:42:09,004][Thread-7:7784][task_id:django.request][base.py:152][WARNING][Not Found: /media/]
+[2018-09-03 16:42:09,855][Thread-15:1420][task_id:django.request][base.py:152][WARNING][Not Found: /favicon.ico]
+[2018-09-03 19:33:53,132][Thread-3:7088][task_id:django.request][base.py:152][WARNING][Not Found: /media/]
+[2018-09-04 10:56:31,922][Thread-7:2972][task_id:django.request][base.py:152][WARNING][Not Found: /media/]
+[2018-09-04 10:56:32,586][Thread-17:7012][task_id:django.request][base.py:152][WARNING][Not Found: /favicon.ico]
+[2018-09-04 10:56:42,663][Thread-29:5780][task_id:django.security.csrf][csrf.py:160][WARNING][Forbidden (CSRF token missing or incorrect.): /admin/login/]
+[2018-09-05 09:29:31,587][Thread-7:3772][task_id:django.request][base.py:152][WARNING][Not Found: /media/]
+[2018-09-05 09:29:32,386][Thread-17:7056][task_id:django.request][base.py:152][WARNING][Not Found: /favicon.ico]

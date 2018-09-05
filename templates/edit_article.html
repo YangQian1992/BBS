@@ -30,7 +30,11 @@
                     <div class="col-sm-4">
                         <select name="article_category" id="category" class="form-control">
                             {% for category in category_list %}
-                                <option value="{{ category.id }}">{{ category.title }}</option>
+                                {% if category.id == article.category_id %}
+                                    <option selected value="{{ category.id }}">{{ category.title }}</option>
+                                {% else %}
+                                    <option value="{{ category.id }}">{{ category.title }}</option>
+                                {% endif %}
                             {% endfor %}
                         </select>
                     </div>

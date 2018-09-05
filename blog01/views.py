@@ -124,10 +124,8 @@ from utils.mypage import MyPage
 
 
 class Index(views.View):
-
     def get(self, request):
         article_list = models.Article.objects.all()
-        print('article_list---->', article_list)
         # 分页
         data_amount = article_list.count()  # 文章总数量
         page_num = request.GET.get('page', 1)  # 通过url 的get请求获取到当前页面
@@ -136,10 +134,6 @@ class Index(views.View):
         data = article_list[page_obj.start:page_obj.end]
         page_html = page_obj.ret_html()
         return render(request, 'index_new.html', {"article_list": data, "page_html": page_html})
-
-    def post(self, request):
-        res = {"code": 0}
-        return JsonResponse(res)
 
 
 def logout(request):
@@ -455,14 +449,10 @@ class Login(views.View):
 
     def post(self, request):
         res = {"code": 0}
-        print(request.POST)
         username = request.POST.get("username")
         password = request.POST.get("password")
         v_code = request.POST.get('v_code')
-        # next_url = request.POST.get('next_url')
-        # next_url = next_url.split("=")[1]
-        # print(next_url)  # /blog/alex/article/3/
-        print(v_code)
+
         # 先判断验证码是否正确
         if v_code.upper() != request.session.get('v_code', ''):
             print(111)
@@ -476,8 +466,6 @@ class Login(views.View):
                 # 表示用户名密码正确
                 # 让当前用户登录,给cookie 和 session 写入数据
                 auth.login(request, user)
-                # if next_url:
-                #     return redirect(next_url)
             else:
                 # 表示用户名或密码不正确
                 res["code"] = 1
@@ -574,16 +562,8 @@ def blog_new(request, username, *args):
     user_obj = models.UserInfo.objects.filter(username=username).first()
     blog = user_obj.blog
     article_list = models.Article.objects.filter(user=user_obj)
-    # 对当前用户博客站点所对应的所有文章按照年月的格式化时间来分组，来进行日期归档和显示文章数量
-    archive_list = article_list.extra(
-        select={
-            "y_m": "DATE_FORMAT(create_time,'%%Y-%%m')"
-        }
-    ).values('y_m').annotate(article_count=Count('id')).values('y_m', 'article_count')
-    print('archive_list--->', archive_list)
 
     # 左侧侧边栏点击文章分类、文章标签、日期归档跳转到各分类中的文章页面
-    print('args--->', args)
     # 判断args 是否为空，若是空，则说明没有点击左侧侧边栏上的各分类；若不为空，则说明进入各分类中的文章页面
     if args:
         if args[0] == 'category':
@@ -605,9 +585,11 @@ def blog_new(request, username, *args):
     data_amount = article_list.all().count()  # 文章总数量
     page_num = request.GET.get('page', 1)  # 通过url 的get请求获取到当前页面
     page_obj = MyPage(page_num, data_amount, per_page_data=2, url_prefix=request.path_info[1:-1])
+    page_html = page_obj.ret_html()
+
     # 按照分页的设置对总数据进行切片
     data = article_list[page_obj.start:page_obj.end]
-    page_html = page_obj.ret_html()
+
 
     return render(request, 'blog_new.html',
                   {"username": username,
@@ -783,9 +765,7 @@ def add_article(request):
 # 富文本编辑器的图片上传
 import os
 from django.conf import settings
-
 def upload(request):
-    print(request.FILES)
     # 设置一个错误集
     res = {"error":0}
     # 获取文件对象

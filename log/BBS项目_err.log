@@ -1,0 +1,27 @@
+[2018-08-24 15:31:47,652][Thread-15:5420][task_id:django.request][exception.py:135][ERROR][Internal Server Error: /blog/article_manage/]
+Traceback (most recent call last):
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\BBS项目\blog01\views.py", line 741, in article_manage
+    article_list = models.Article.objects.filter(user=request.user)
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\query.py", line 784, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\query.py", line 802, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\sql\query.py", line 1250, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\sql\query.py", line 1276, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\sql\query.py", line 1179, in build_filter
+    self.check_related_objects(field, value, opts)
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\sql\query.py", line 1078, in check_related_objects
+    for v in value:
+  File "C:\Users\zhangbeibei\AppData\Local\Programs\Python\Python36\lib\site-packages\django\utils\functional.py", line 239, in inner
+    return func(self._wrapped, *args)
+TypeError: 'AnonymousUser' object is not iterable

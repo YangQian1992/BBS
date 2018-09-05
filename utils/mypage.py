@@ -1,7 +1,3 @@
-from django.shortcuts import render
-# Create your views here.
-
-
 class MyPage(object):
     def __init__(self, page_num, all_data_amount, url_prefix, per_page_data=10, page_show_tags=9):
 
@@ -22,14 +18,9 @@ class MyPage(object):
             page_num = int(page_num)
         except Exception:
             page_num = 1
-        # 如果当前页码小于等于0，我给你返回第一页
+        # 如果当前页码小于等于0，返回第一页
         if page_num <= 0:
             page_num = 1
-        # # 定义每页显示多少条，默认10条
-        # per_page_data = 10
-
-        # # 计算总共有多少条数据(剔除)
-        # all_data_amount = models.Book.objects.all().count()
 
         # 通过总数据的条数来计算有多少页,a为商，b为余数，如果余数！=0，总页数=a+1，否则=a
         total_page_num, more = divmod(self.all_data_amount, self.per_page_data)
@@ -42,8 +33,7 @@ class MyPage(object):
 
         if total_page_num == 0:
             page_num = 1
-            # total_page_num = 1
-        # [(n-1)*10:n*10] 通过当前页码计算显示数据的位置或者说条数
+
         page_start_num = (page_num - 1) * self.per_page_data
         page_end_num = page_num * self.per_page_data
         self.page_num = page_num
@@ -58,8 +48,6 @@ class MyPage(object):
     @property
     def end(self):
         return self.page_end_num
-        # 页面上显示的页码标签个数，单数，默认用为9个（剔除）
-        # page_show_tags = 9
 
     def ret_html(self):
 
@@ -73,6 +61,7 @@ class MyPage(object):
         if show_tags_right >= self.total_page_num:
             show_tags_right = self.total_page_num
             show_tags_left = self.total_page_num - self.page_show_tags + 1
+
         # 当总页码不够最多显示的页码数，只需要三页，肯定不够9页，没我们就显示3页
         if self.total_page_num < self.page_show_tags:
             show_tags_left = 1
@@ -92,4 +81,5 @@ class MyPage(object):
             else:
                 page_tag_html += '<li><a href="/{1}/?page={0}">{0}</a></li>'.format(i, self.url_prefix)
         page_tag_html = start + front_page_tag + first_page_tag + page_tag_html + last_page_tag + next_page_tag + end
+
         return page_tag_html

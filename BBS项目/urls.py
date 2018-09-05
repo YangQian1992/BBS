@@ -41,7 +41,7 @@ urlpatterns = [
     ############ 滑动验证码版本的登录 ############
     url(r'^pcgetcaptcha/$',views.pcgetcaptcha),
     url(r'^login_huadong/$',views.login_huadong),
-    ############  BBS博客的主页  ############
+    ############  BBS博客的首页  ############
     url(r'^index_new/$', views.Index.as_view()),
     ############  BBS项目的个人博客站点  ############
     url(r'^blog/',include(blog01_url)),
@@ -53,7 +53,7 @@ urlpatterns = [
     url(r'^$',views.Index.as_view()),
 ]
 
-
+# 调试
 from django.conf import settings
 from django.conf.urls import include, url
 
