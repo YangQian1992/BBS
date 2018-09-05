@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d79d8f6-e230-49f3-aeeb-f96fa22757b0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BBS项目/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BBS项目/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BBS项目/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/BBS项目/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog01/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog01/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog01/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog01/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/BBS项目_collect.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/BBS项目_collect.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/BBS项目_err.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/BBS项目_err.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/BBS项目_info.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/BBS项目_info.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/edit_article.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/edit_article.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login_ajax.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login_ajax.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/mypage.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mypage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -63,14 +53,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog01/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-961">
+            <state relative-caret-position="31">
               <caret line="525" column="20" selection-start-line="525" selection-start-column="20" selection-end-line="525" selection-end-column="20" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitattributes" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitattributes">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="93">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -87,7 +86,7 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BBS项目/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
+            <state relative-caret-position="1147">
               <caret line="42" column="38" selection-start-line="42" selection-start-column="38" selection-end-line="42" selection-end-column="38" />
             </state>
           </provider>
@@ -158,6 +157,7 @@
         <option value="$PROJECT_DIR$/blog01/views.py" />
         <option value="$PROJECT_DIR$/templates/left_menu.html" />
         <option value="$PROJECT_DIR$/blog01/admin.py" />
+        <option value="$PROJECT_DIR$/.gitattributes" />
       </list>
     </option>
   </component>
@@ -197,54 +197,6 @@
               <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
               <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="blog01" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="blog01" type="462c0819:PsiDirectoryNode" />
-              <item name="templatetags" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBS项目" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBS项目" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -265,11 +217,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\BBS项目" />
       <recent name="E:\BBS项目\templates" />
       <recent name="E:\BBS项目\static\plugins" />
       <recent name="E:\BBS项目\static\font" />
       <recent name="E:\BBS项目\media\avatar" />
-      <recent name="E:\BBS项目\utils" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -388,13 +340,13 @@
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32857144" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5015267" side_tool="true" visible="true" weight="0.13571429" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5015267" side_tool="true" weight="0.13571429" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4984733" weight="0.13571429" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32857144" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.35" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.44464287" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49760765" visible="true" weight="0.25267175" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49760765" visible="true" weight="0.25801528" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.33282444" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -425,13 +377,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/BBS项目/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="15" column="30" lean-forward="true" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="996">
@@ -743,7 +688,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BBS项目/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
+        <state relative-caret-position="1147">
           <caret line="42" column="38" selection-start-line="42" selection-start-column="38" selection-end-line="42" selection-end-column="38" />
         </state>
       </provider>
@@ -757,11 +702,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blog01/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-961">
+        <state relative-caret-position="31">
           <caret line="525" column="20" selection-start-line="525" selection-start-column="20" selection-end-line="525" selection-end-column="20" />
           <folding>
             <element signature="e#0#59#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitattributes">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
